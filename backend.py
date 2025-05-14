@@ -6,7 +6,12 @@ app = Flask(__name__)
 CORS(app)
 
 # Configure OpenAI API Key
-openai.api_key = "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"
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
 
 # Chatbot function using updated OpenAI API
 def mental_health_chatbot(user_input):
