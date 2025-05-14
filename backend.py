@@ -29,7 +29,7 @@ def mental_health_chatbot(user_input):
     ]
 
     # Call OpenAI's ChatCompletion API
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-4",
         messages=messages,
         max_tokens=500,
