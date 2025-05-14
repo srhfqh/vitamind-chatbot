@@ -12,6 +12,9 @@ from dotenv import load_dotenv
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+# Create the OpenAI client
+client = OpenAI()
+
 
 # Chatbot function using updated OpenAI API
 def mental_health_chatbot(user_input):
