@@ -13,7 +13,7 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Create the OpenAI client
-client = OpenAI()
+client = openai.OpenAI()
 
 
 # Chatbot function using updated OpenAI API
