@@ -129,11 +129,11 @@
 
     function showGreeting() {
       const chatBox = document.getElementById("chat-box");
-      chatBox.innerHTML += 
+      chatBox.innerHTML += `
         <div class="chat-message bot">
           <div class="bubble">Hai! Saya VitaMind. Bagaimana saya boleh membantu anda hari ini?</div>
         </div>
-      ;
+      `;
     }
 
     async function sendMessage(userMessage) {
@@ -144,11 +144,11 @@
 
       const chatBox = document.getElementById("chat-box");
 
-      chatBox.innerHTML += 
+      chatBox.innerHTML += `
         <div class="chat-message user">
           <div class="bubble"><strong>Anda:</strong> ${userMessage}</div>
         </div>
-      ;
+      `;
       chatBox.scrollTop = chatBox.scrollHeight;
 
       try {
@@ -160,18 +160,18 @@
 
         const data = await response.json();
 
-        chatBox.innerHTML += 
+        chatBox.innerHTML += `
           <div class="chat-message bot">
             <div class="bubble"><strong>VitaMind:</strong> ${data.response}</div>
           </div>
-        ;
+        `;
         chatBox.scrollTop = chatBox.scrollHeight;
       } catch (error) {
-        chatBox.innerHTML += 
+        chatBox.innerHTML += `
           <div class="chat-message bot">
             <div class="bubble bg-danger text-white">Maaf, terdapat masalah dengan pelayan.</div>
           </div>
-        ;
+        `;
         chatBox.scrollTop = chatBox.scrollHeight;
         console.error("Error:", error);
       }
