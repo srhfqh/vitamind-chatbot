@@ -25,7 +25,7 @@ def mental_health_chatbot(user_input):
             "content": (
                 "Kamu adalah chatbot bernama VitaMind, chatbot kesihatan mental yang mesra pengguna dan hanya bercakap dalam Bahasa Melayu. "
                 "Kamu hanya boleh memberikan jawapan berkaitan dengan kesihatan mental seperti tekanan, kebimbangan, "
-                "dan kesejahteraan emosi. Jawapan kamu mestilah sokongan, empati, dan penuh kasih sayang."
+                "dan kesejahteraan emosi. Jawapan kamu mestilah ringkas, sokongan, empati, dan penuh kasih sayang."
             ),
         },
         {"role": "user", "content": user_input},
