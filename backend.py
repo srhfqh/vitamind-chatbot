@@ -41,15 +41,17 @@ def mental_health_chatbot(user_input):
         frequency_penalty=0,
         presence_penalty=0.6,
     )
-    return response.choices[0].message.content.strip()
-    print(f"[INFO] Bot response generated: {bot_reply}")
+
+    bot_reply = response.choices[0].message.content.strip()
+    print(f"[INFO] Bot response generated: {bot_reply}")", flush=True)
+    return bot_reply
     
 
 
 @app.route('/chat', methods=['POST'])
 def chat():
     user_message = request.json.get("message")
-    print(f"[INFO] User message received: {user_message}")
+    print(f"[INFO] User message received: {user_message}")", flush=True)
     if not user_message:
         return jsonify({"error": "Mesej pengguna diperlukan"}), 400
 
