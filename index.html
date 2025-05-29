@@ -271,6 +271,7 @@
         <div id="chat-box"></div>
         <div class="input-group">
           <input type="text" id="user-message" class="form-control" placeholder="Tulis mesej anda..." onkeydown="checkEnter(event)">
+          <button type="button" id="emoji-btn" class="btn btn-light">😊</button>
           <button class="btn btn-dark" onclick="sendMessages()">Hantar</button>
         </div>
         <button class="clear-btn" onclick="clearChat()">Kosongkan Chat</button>
@@ -351,8 +352,31 @@
       sendMessage(userMessage);
       input.value = '';
     }
+    const button = document.querySelector('#emoji-btn');
+const input = document.querySelector('#user-message');
+
+const picker = new EmojiButton({
+  position: 'top-start',
+});
+
+picker.on('emoji', emoji => {
+  const start = input.selectionStart;
+  const end = input.selectionEnd;
+  const text = input.value;
+  input.value = text.slice(0, start) + emoji + text.slice(end);
+  input.focus();
+  input.selectionStart = input.selectionEnd = start + emoji.length;
+});
+
+button.addEventListener('click', () => {
+  picker.togglePicker(button);
+});
+
 
     window.onload = showGreeting;
   </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@4.6.2/dist/emoji-button.min.js"></script>
+
 </body>
 </html>
