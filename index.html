@@ -8,10 +8,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
 
   <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
     body {
       background-color: #f9f9f9;
       font-family: 'Helvetica Neue', sans-serif;
       color: #222;
+    }
+
+    .wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     .header {
@@ -29,8 +42,8 @@
     }
 
     .btn-dark {
-  background-color: #6FAF7A !important;
-  border-color: #6FAF7A !important;
+      background-color: #6FAF7A !important;
+      border-color: #6FAF7A !important;
     }
 
     .tagline {
@@ -38,13 +51,19 @@
       font-style: italic;
     }
 
+    .page-layout {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+    }
+
     .chat-container {
       width: 100%;
       max-width: 100%;
       padding: 1rem 2rem;
       background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
     #chat-box {
@@ -89,14 +108,13 @@
       margin-top: 1rem;
     }
 
-    
-.input-group input {
-  flex: 1;
-}
+    .input-group input {
+      flex: 1;
+    }
 
-.input-group .btn {
-  margin-left: 10px;
-}
+    .input-group .btn {
+      margin-left: 10px;
+    }
 
     footer {
       background-color: #6FAF7A;
@@ -120,179 +138,150 @@
       text-decoration: underline;
     }
 
+    .quote-section {
+      width: 25%;
+      background-color: #fdfce7;
+      padding: 2rem;
+      color: #4b4b00;
+      font-family: 'Caveat', cursive;
+      align-items: center;
+      font-size: 1.4rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.05), 2px 0 10px rgba(0,0,0,0.05);
+      border-right: 2px dashed #d4d39c;
+    }
 
+    .quote-box {
+      background-color: #fffcc0;
+      padding: 1.2rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
+      transform: rotate(-2.5deg);
+      position: relative;
+      max-width: 220px;
+      text-align: center;
+      margin-top: 2rem;
+      margin-bottom: 1.5rem;
+    }
 
-/* Left: Quote Section */
-.quote-section {
-  width: 25%;
-  background-color: #fdfce7;
-  padding: 2rem;
-  color: #4b4b00;
-  font-family: 'Caveat', cursive;
-  align-items: center;
-  font-size: 1.4rem;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.05), 2px 0 10px rgba(0,0,0,0.05);
-  border-right: 2px dashed #d4d39c;
-}
- 
-
-  .quote-box {
-  background-color: #fffcc0;
-  padding: 1.2rem 1.5rem;
-  border-radius: 12px;
-  box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
-  transform: rotate(-2.5deg);
-  position: relative;
-  max-width: 220px;
-  text-align: center;
-  margin-top: 2rem;
-  margin-bottom: 1.5rem;
-
-  }
     .quote-box::before {
-  content: "📌";
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.8rem;
-}
+      content: "📌";
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.8rem;
+    }
 
-    
-       @media (max-width: 768px) {
-  .page-layout {
-    flex-direction: column;
-  }
+    @media (max-width: 768px) {
+      .page-layout {
+        flex-direction: column;
+      }
 
-  .quote-section,
-  .chatbot-section {
-    width: 100%;
-  }
+      .quote-section,
+      .chatbot-section {
+        width: 100%;
+      }
 
-  .quote-section {
-    align-items: flex-start;
-  }
-}
+      .quote-section {
+        align-items: flex-start;
+      }
+    }
+
     .note-heading {
-  background-color: #fffcc0;
-  padding: 0.6rem 1.2rem;
-  border-radius: 10px;
-  font-family: 'Caveat', cursive;
-  font-size: 1.8rem;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  position: relative;
-  transform: rotate(-1.5deg);
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-}
+      background-color: #fffcc0;
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      font-family: 'Caveat', cursive;
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+      transform: rotate(-1.5deg);
+      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    }
 
-.note-heading::before {
-  content: "📌";
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.5rem;
-}
+    .note-heading::before {
+      content: "📌";
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+    }
 
-    
-/* Right: Chat Section */
-.chatbot-section {
-  width: 75%;
-  padding: 1rem 2rem;
-  background: linear-gradient(to bottom right, #f1fef4, #d3f0e0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .chatbot-section {
+      width: 75%;
+      padding: 1rem 2rem;
+      background: linear-gradient(to bottom right, #f1fef4, #d3f0e0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-    html, body {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.wrapper {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.page-layout {
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-}
     #emoji-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-
- 
-
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
   </style>
 </head>
 <body>
   <div class="wrapper">
-  <!-- Full-width header -->
-  <div class="header">
-    <div class="brand">VitaMind</div>
-    <div class="tagline">Teman AI Sembang Anda</div>
-  </div>
-
-  <!-- Split-screen content area -->
-  <div class="page-layout">
-    <!-- Left: Quote of the Day -->
-    <div class="quote-section">
-      <div class="note-heading">Nota Harian</div>
-      
-     <div class="quote-box" style="transform: rotate(-2deg); background-color: #fffcc0;">
-  "Tidur cukup pun salah satu self-care tau 😴"
-</div>
-
-<div class="quote-box" style="transform: rotate(2deg); background-color: #ffe9ec;">
-  "Self-love tu bukan manja, tu penting 🧡"
-</div>
-
-<div class="quote-box" style="transform: rotate(-1deg); background-color: #dfffe7;">
-  "Dunia ni kadang serabut, tapi at least nasi lemak tetap sedap"
-</div>
-
+    <!-- Header -->
+    <div class="header">
+      <div class="brand">VitaMind</div>
+      <div class="tagline">Teman AI Sembang Anda</div>
     </div>
 
-    <!-- Right: Chatbot -->
-    <div class="chatbot-section">
-      <div class="chat-container">
-        <h2 class="text-center mb-4">Chatbot Kesihatan Mental (Bahasa Melayu)</h2>
-        <div id="chat-box"></div>
-      
-       <div class="input-group">
-          <input type="text" id="user-message" class="form-control" placeholder="Tulis mesej anda..." onkeydown="checkEnter(event)">
-         <div class="btn-group ms-2" id="emoji-container">
-           <button type="button" class="btn btn-light" id="emoji-button" style="font-size: 1.4rem;">😊</button>
-         <button class="btn btn-dark" onclick="sendMessages()">Hantar</button>
+    <!-- Main content -->
+    <div class="page-layout">
+      <!-- Left: Quote section -->
+      <div class="quote-section">
+        <div class="note-heading">Nota Harian</div>
+
+        <div class="quote-box" style="transform: rotate(-2deg); background-color: #fffcc0;">
+          "Tidur cukup pun salah satu self-care tau 😴"
         </div>
-     </div>
-        <button class="clear-btn" onclick="clearChat()">Kosongkan Chat</button>
-      
+
+        <div class="quote-box" style="transform: rotate(2deg); background-color: #ffe9ec;">
+          "Self-love tu bukan manja, tu penting 🧡"
+        </div>
+
+        <div class="quote-box" style="transform: rotate(-1deg); background-color: #dfffe7;">
+          "Dunia ni kadang serabut, tapi at least nasi lemak tetap sedap"
+        </div>
+      </div>
+
+      <!-- Right: Chat section -->
+      <div class="chatbot-section">
+        <div class="chat-container">
+          <h2 class="text-center mb-4">Chatbot Kesihatan Mental (Bahasa Melayu)</h2>
+          <div id="chat-box"></div>
+
+          <div class="input-group">
+            <input type="text" id="user-message" class="form-control" placeholder="Tulis mesej anda..." onkeydown="checkEnter(event)">
+            <div class="btn-group ms-2" id="emoji-container">
+              <button type="button" class="btn btn-light" id="emoji-button" style="font-size: 1.4rem;">😊</button>
+              <button class="btn btn-dark" onclick="sendMessages()">Hantar</button>
+            </div>
+          </div>
+          <button class="clear-btn" onclick="clearChat()">Kosongkan Chat</button>
+        </div>
+      </div>
     </div>
+
+    <!-- Footer -->
+    <footer>
+      Developed by Nur Sarah Afiqah Binti Rosli @ UniKL MIIT 2025
+    </footer>
   </div>
 
-  <!-- Full-width footer -->
-  <footer>
-    Developed by Nur Sarah Afiqah Binti Rosli @ UniKL MIIT 2025
-  </footer>
-  </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@4.6.2/dist/emoji-button.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@4.6.2/dist/emoji-button.min.js"></script>
 
   <script>
     function clearChat() {
@@ -364,28 +353,26 @@
     }
 
     window.onload = () => {
-    showGreeting();
+      showGreeting();
 
-     const picker = new EmojiButton({
-  position: 'bottom-start', // or 'bottom-start' as preferred
-  theme: 'auto',
-       autoHide: true,
-});
+      const picker = new EmojiButton({
+        position: 'bottom-start',
+        theme: 'auto',
+        autoHide: true,
+      });
 
-     const button = document.querySelector('#emoji-button');
-  const input = document.querySelector('#user-message');
+      const button = document.querySelector('#emoji-button');
+      const input = document.querySelector('#user-message');
 
       button.addEventListener('click', () => {
-    picker.togglePicker(button);
-  });
+        picker.togglePicker(button);
+      });
 
-  picker.on('emoji', emoji => {
-    input.value += emoji;
-    input.focus();
-  });
-};
-    
+      picker.on('emoji', emoji => {
+        input.value += emoji;
+        input.focus();
+      });
+    };
   </script>
-
 </body>
 </html>
