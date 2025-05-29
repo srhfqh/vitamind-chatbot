@@ -91,7 +91,7 @@
       padding: 10px 0;
       text-align: center;
       font-size: 0.9rem;
-      margin-top: 2rem;
+      flex-shrink: 0;
     }
 
     button.clear-btn {
@@ -203,16 +203,20 @@
     html, body {
   height: 100%;
   margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .wrapper {
-  min-height: calc(100vh - 60px); /* Leaves space for the footer */
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 .page-layout {
   flex: 1;
+  display: flex;
+  flex-direction: row;
 }
 
  
