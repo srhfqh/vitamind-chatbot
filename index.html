@@ -39,12 +39,16 @@
     }
 
     .chat-container {
-      max-width: 700px;
-      margin: 3rem auto;
+      width: 100%;
+      max-width: 100%;
+      padding: 1rem 2rem;
+      background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
     #chat-box {
-      height: 400px;
+      height: 300px;
       overflow-y: auto;
       border: 1px solid #ccc;
       border-radius: 6px;
@@ -84,6 +88,15 @@
     .input-group {
       margin-top: 1rem;
     }
+
+    
+.input-group input {
+  flex: 1;
+}
+
+.input-group .btn {
+  margin-left: 10px;
+}
 
     footer {
       background-color: #6FAF7A;
@@ -193,7 +206,7 @@
 /* Right: Chat Section */
 .chatbot-section {
   width: 75%;
-  padding: 2rem;
+  padding: 1rem 2rem;
   background: linear-gradient(to bottom right, #f1fef4, #d3f0e0);
   display: flex;
   align-items: center;
