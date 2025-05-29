@@ -143,6 +143,28 @@
   color: #5c5c00;
 }
 
+  .quote-box {
+  background-color: #fffcc0;
+  padding: 1.2rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
+  transform: rotate(-2.5deg);
+  position: relative;
+  max-width: 220px;
+  text-align: center;
+  margin-top: 2rem;
+
+  }
+    .quote-box::before {
+  content: "📌";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.8rem;
+}
+
+    
        @media (max-width: 768px) {
   .page-layout {
     flex-direction: column;
@@ -182,9 +204,9 @@
   <div class="page-layout">
     <!-- Left: Quote of the Day -->
     <div class="quote-section">
-      <h4>💚 Petikan Hari Ini</h4>
-      <p>"Jaga hati, jaga diri. Perlahan itu juga kemajuan."</p>
-    </div>
+      <div class="quote-box">
+    "Jaga hati, jaga diri. 💚 Perlahan itu juga kemajuan."
+  </div>
 
     <!-- Right: Chatbot -->
     <div class="chatbot-section">
