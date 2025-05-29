@@ -199,11 +199,28 @@
   align-items: center;
   justify-content: center;
 }
+
+    html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.wrapper {
+  min-height: calc(100vh - 60px); /* Leaves space for the footer */
+  display: flex;
+  flex-direction: column;
+}
+
+.page-layout {
+  flex: 1;
+}
+
  
 
   </style>
 </head>
 <body>
+  <div class="wrapper">
   <!-- Full-width header -->
   <div class="header">
     <div class="brand">VitaMind</div>
