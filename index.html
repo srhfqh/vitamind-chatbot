@@ -269,16 +269,16 @@
       <div class="chat-container">
         <h2 class="text-center mb-4">Chatbot Kesihatan Mental (Bahasa Melayu)</h2>
         <div id="chat-box"></div>
-        <div id="emoji-container" style="position: relative;">
-  <button type="button" class="btn btn-light" id="emoji-button" style="font-size: 1.4rem;">😊</button>
-</div>
-
-        <div class="input-group">
+      
+       <div class="input-group">
           <input type="text" id="user-message" class="form-control" placeholder="Tulis mesej anda..." onkeydown="checkEnter(event)">
-          <button class="btn btn-dark" onclick="sendMessages()">Hantar</button>
+         <div class="btn-group ms-2" id="emoji-container">
+           <button type="button" class="btn btn-light" id="emoji-button" style="font-size: 1.4rem;">😊</button>
+         <button class="btn btn-dark" onclick="sendMessages()">Hantar</button>
         </div>
+     </div>
         <button class="clear-btn" onclick="clearChat()">Kosongkan Chat</button>
-      </div>
+      
     </div>
   </div>
 
@@ -362,16 +362,19 @@
     showGreeting();
 
      const picker = new EmojiButton({
-  position: 'top-end', // or 'bottom-start' as preferred
+  position: 'bottom-start', // or 'bottom-start' as preferred
   theme: 'auto',
-  rootElement: document.querySelector('#emoji-container') 
+       autoHide: true,
 });
 
      const button = document.querySelector('#emoji-button');
   const input = document.querySelector('#user-message');
 
-     button.addEventListener('click', () => picker.togglePicker(button));
-    picker.on('emoji', emoji => {
+      button.addEventListener('click', () => {
+    picker.togglePicker(button);
+  });
+
+  picker.on('emoji', emoji => {
     input.value += emoji;
     input.focus();
   });
