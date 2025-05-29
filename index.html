@@ -228,10 +228,23 @@
       align-items: center;
       gap: 0.5rem;
     }
+
+    .floating-gif {
+  position: fixed;
+  bottom: 60px; /* leaves space above footer */
+  right: 20px;
+  width: 120px;  
+  z-index: 10;
+  pointer-events: none; /* allows clicks to pass through */
+  opacity: 0.9;
+}
+
   </style>
 </head>
 <body>
   <div class="wrapper">
+    <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXNvb3A4dnp6MjBicXEzY2UwaGV2eTdsazZkODlncGg0b3c4MWQyNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lxU0vjra4TQQg/giphy.gif" alt="Relaxing animation" class="floating-gif">
+
     <!-- Header -->
     <div class="header">
       <div class="brand">VitaMind</div>
