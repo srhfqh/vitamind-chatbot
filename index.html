@@ -226,6 +226,15 @@
         flex-direction: column;
       }
 
+      .quote-section {
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-top: 2px dashed #d4d39c;
+    border-right: none;
+    border-left: none;
+  }
+
+
       .quote-section, .chatbot-section {
         width: 100%;
       }
@@ -250,10 +259,14 @@
   
         font-size: 1.1rem;
         transform: none !important;
+        padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
       }
 
       .note-heading {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
+    margin-bottom: 1rem;
+
        
       }
 
@@ -276,15 +289,15 @@
       <div class="tagline">Teman AI Sembang Anda</div>
     </div>
 
-    <div class="page-layout">
-      <div class="quote-section">
+    <div class="page-layout flex-wrap flex-md-nowrap">
+      <div class="quote-section order-2 order-md-1">
         <div class="note-heading">Nota Harian</div>
         <div class="quote-box">"Tidur cukup pun salah satu self-care tau 😴"</div>
         <div class="quote-box">"Self-love tu bukan manja, tu penting 🧡"</div>
         <div class="quote-box">"Dunia ni kadang serabut, tapi at least nasi lemak tetap sedap"</div>
       </div>
 
-      <div class="chatbot-section">
+       <div class="chatbot-section order-1 order-md-2">
         <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3g5NmpjMzhpcHd0dm83cm95dzR2N2dtend5cjBxMXk2ZmdhNmdmMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7uLItJVS8oaPvaoALH/giphy.gif" class="floating-gif" alt="Relaxing animation">
         <div class="chat-container">
           <div id="chat-box"></div>
