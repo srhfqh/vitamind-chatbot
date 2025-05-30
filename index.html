@@ -214,6 +214,7 @@
     }
 
     .chatbot-section {
+      position: relative;
       width: 75%;
       padding: 1rem 2rem;
       background: linear-gradient(to bottom right, #f1fef4, #d3f0e0);
@@ -230,11 +231,12 @@
     }
 
     .floating-gif {
-  position: fixed;
-  bottom: 60px; /* leaves space above footer */
-  right: 20px;
-  width: 120px;  
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  width: 80px;  
   z-index: 10;
+  height: auto;
   pointer-events: none; /* allows clicks to pass through */
   opacity: 0.9;
 }
