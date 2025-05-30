@@ -288,7 +288,11 @@
             <input type="text" id="user-message" class="form-control" placeholder="Tulis mesej anda..." onkeydown="checkEnter(event)">
             <div id="emoji-container" style="position: relative;">
               <button type="button" class="btn btn-light" id="emoji-button" style="font-size: 1.4rem;">😊</button>
-              <emoji-picker id="emoji-picker" style="display:none;"></emoji-picker>
+              <emoji-picker 
+  id="emoji-picker" 
+  style="display:none; position: absolute; bottom: 50px; left: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+</emoji-picker>
+
 
               <button class="btn btn-dark" onclick="sendMessages()">Hantar</button>
             </div>
