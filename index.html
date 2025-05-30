@@ -104,12 +104,16 @@
     .chatbot-section {
       width: 75%;
       padding: 2rem;
+      min-height: 90vh;
       position: relative;
       background: linear-gradient(to bottom right, #f1fef4, #d3f0e0);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      box-sizing: border-box;
+      overflow-x: hidden;
+
     }
 
     .floating-gif {
@@ -124,6 +128,7 @@
 
     .chat-container {
       width: 100%;
+      height: 85vh;
       max-width: 720px;
       background-color: white;
       padding: 1.5rem;
@@ -213,8 +218,13 @@
         width: 100%;
       }
 
+      .chatbot-section {
+    min-height: auto;
+    padding: 1.2rem;
+  }
+
       .chat-container {
-        max-width: 100%;
+        height: 80vh;
       }
 
       .floating-gif {
@@ -230,7 +240,7 @@
       }
 
       .note-heading {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
         transform: none;
       }
 
@@ -268,7 +278,7 @@
             <input type="text" id="user-message" class="form-control" placeholder="Tulis mesej anda..." onkeydown="checkEnter(event)">
             <div id="emoji-container">
               <button type="button" class="btn btn-light" id="emoji-button">😊</button>
-              <emoji-picker id="emoji-picker" style="display:none; position: absolute; bottom: 50px; left: 0; z-index: 1000;"></emoji-picker>
+              <emoji-picker id="emoji-picker" style="display:none; position: absolute; bottom: 50px; right: 0; z-index: 1000;"></emoji-picker>
             </div>
             <button class="btn btn-dark" onclick="sendMessages()">Hantar</button>
           </div>
