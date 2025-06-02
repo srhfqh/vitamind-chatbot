@@ -223,7 +223,7 @@
 
     @media (max-width: 768px) {
       .page-layout {
-        flex-direction: column-reverse;
+        flex-direction: column;
       }
 
       .quote-section {
@@ -288,10 +288,15 @@
       }
 
       #user-message {
-        height: 48px;
-        font-size: 1rem;
-        padding: 10px;
-      }
+  min-height: 48px;
+  max-height: 120px;
+  font-size: 1rem;
+  padding: 10px;
+  resize: none;
+  overflow-y: auto;
+  line-height: 1.5;
+}
+
     }
   </style>
 </head>
@@ -315,8 +320,8 @@
         <div class="chat-container">
           <div id="chat-box"></div>
           <div class="input-group d-flex flex-column flex-sm-row">
-            <input type="text" id="user-message" class="form-control" placeholder="Tulis mesej anda..." onkeydown="checkEnter(event)">
-            <div id="emoji-container">
+           <textarea id="user-message" class="form-control" rows="1" placeholder="Tulis mesej anda..." onkeydown="checkEnter(event)"></textarea>
+
               <button type="button" class="btn btn-light" id="emoji-button">😊</button>
               <emoji-picker id="emoji-picker" style="display:none; position: absolute; bottom: 50px; right: 0; z-index: 1000;"></emoji-picker>
             </div>
@@ -409,6 +414,13 @@
         input.focus();
         picker.style.display = 'none';
       });
+
+      const textarea = document.getElementById("user-message");
+textarea.addEventListener("input", () => {
+  textarea.style.height = "auto";
+  textarea.style.height = textarea.scrollHeight + "px";
+});
+
     });
   </script>
 </body>
