@@ -277,7 +277,8 @@
       }
 
       .input-group {
-        flex-direction: column;
+        flex-direction: row;
+        align-items: stretch;
         gap: 0.5rem;
       }
 
@@ -288,13 +289,27 @@
       }
 
       #user-message {
+        height: auto;
   min-height: 48px;
-  max-height: 120px;
+  max-height: 80px;
   font-size: 1rem;
   padding: 10px;
   resize: none;
   overflow-y: auto;
-  line-height: 1.5;
+  flex: 1;
+}
+
+      #emoji-container {
+  display: flex;
+  align-items: center;
+}
+
+#emoji-button {
+  height: 100%;
+}
+
+      .input-group .btn {
+  flex-shrink: 0;
 }
 
     }
