@@ -223,7 +223,7 @@
 
     @media (max-width: 768px) {
       .page-layout {
-        flex-direction: column;
+        flex-direction: column-reverse;
       }
 
       .quote-section {
@@ -240,18 +240,18 @@
       }
 
       .chatbot-section {
-    min-height: auto;
+    min-height: 100vh;
     padding: 1.5rem 1rem;
   }
 
       .chat-container {
-        max-height: 100%;
-    height: auto;
+        max-height: none;
+    height: 80vh;
     padding: 1rem;
   }
 
        #chat-box {
-    max-height: 50vh;
+    max-height: 60vh;
        }
 
 
@@ -290,7 +290,7 @@
       #user-message {
         height: 48px;
         font-size: 1rem;
-  padding: 10px;
+        padding: 10px;
       }
     }
   </style>
