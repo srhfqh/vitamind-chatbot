@@ -35,7 +35,7 @@ def mental_health_chatbot(user_input):
     response = client.chat.completions.create(
         model="gpt-4",
         messages=messages,
-        max_tokens=100,
+        max_tokens=400,
         temperature=0.7,
         top_p=1,
         frequency_penalty=0,
