@@ -241,19 +241,27 @@
 
       .chatbot-section {
     min-height: 100vh;
+        height: auto;
     padding: 1rem 0.5rem;
+        display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
 
       .chat-container {
         height: auto;
         padding: 1rem 0.8rem;
+        min-height: 80vh;
+        flex-grow: 1;
   }
 
        #chat-box {
-    max-height: 60vh;
+    min-height: 60vh;
          font-size: 0.95rem;
     line-height: 1.4;
     padding: 0.8rem;
+         max-height: none;
+         overflow-y: auto;
        }
 
         .chat-message .bubble {
