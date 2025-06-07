@@ -3,9 +3,16 @@ from flask import render_template, redirect, url_for, session
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-import openai
 import os
 from dotenv import load_dotenv
+from werkzeug.security import generate_password_hash, check_password_hash
+
+import json
+import difflib
+
+# Load the custom chatbot dataset
+with open('vitamind_dataset.json', 'r', encoding='utf-8') as f:
+    chatbot_dataset = json.load(f)
 
 
 app = Flask(__name__)
@@ -31,52 +38,37 @@ def load_user(user_id):
 
 
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY") 
-client = openai.OpenAI()
 
 
-# Chatbot function using updated OpenAI API
+
 def mental_health_chatbot(user_input):
-    # Define the system and user roles in the chat
-    messages = [
-        {
-            "role": "system",
-            "content": (
-                 "Anda ialah VitaMind, chatbot kesihatan mental AI yang mesra, penyayang, dan penuh empati. "
-    "Tugas anda ialah memberikan sokongan emosi kepada pengguna dalam Bahasa Melayu dengan cara yang menenangkan dan tidak menghakimi. "
-    "Anda hanya bercakap tentang topik berkaitan kesihatan mental seperti tekanan, kebimbangan, kesedihan, motivasi, dan kesejahteraan emosi. "
-    "Jawapan anda mestilah pendek, jelas, dan menggunakan nada lembut yang menyentuh hati. Berikan semangat, sokongan moral, dan galakkan pengguna untuk menjaga diri. "
-    "Jika anda tidak pasti atau soalan tidak berkaitan kesihatan mental, beritahu dengan sopan bahawa anda hanya boleh membantu dalam isu berkaitan kesihatan mental."
-            ),
-        },
-        {"role": "user", "content": user_input},
-    ]
+    user_input = user_input.lower()
+    best_match = None
+    highest_ratio = 0.0
 
-    # Call OpenAI's ChatCompletion API
-    response = client.chat.completions.create(
-        model="gpt-4",
-        messages=messages,
-        max_tokens=400,
-        temperature=0.7,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0.6,
-    )
+    for entry in chatbot_dataset:
+        dataset_input = entry['user_input'].lower()
+        ratio = difflib.SequenceMatcher(None, user_input, dataset_input).ratio()
 
-    bot_reply = response.choices[0].message.content.strip()
-    print(f"[INFO] Bot response generated: {bot_reply}", flush=True)
-    return bot_reply
-    
+        if ratio > highest_ratio:
+            highest_ratio = ratio
+            best_match = entry['bot_reply']
+
+    # If no good match, send default empathetic message
+    if highest_ratio < 0.4:
+        return "Saya faham perasaan awak tu... Cerita sikit lagi, saya sedia nak dengar dan bantu ikut kemampuan saya 😊"
+
+    return best_match
+
 
 
 @app.route('/chat', methods=['POST'])
 def chat():
     user_message = request.json.get("message")
-    print(f"[INFO] User message received: {user_message}", flush=True)
     if not user_message:
         return jsonify({"error": "Mesej pengguna diperlukan"}), 400
 
-    # Get chatbot response
+
     bot_response = mental_health_chatbot(user_message)
     return jsonify({"response": bot_response})
 
@@ -89,7 +81,7 @@ if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
 
-from werkzeug.security import generate_password_hash, check_password_hash
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -142,8 +134,12 @@ def chat_page():
     # you can pass the reason to your chat page template
     return render_template('chat.html', reason=reason)
 
+@app.route('/admin')
+@login_required
+def admin_dashboard():
+    if current_user.role != 'admin':
+        return redirect(url_for('reason_selection'))
+    return render_template('admin_dashboard.html')
 
-# Run the app
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+
+
