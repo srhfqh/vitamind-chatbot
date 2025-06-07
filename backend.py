@@ -90,14 +90,14 @@ def serve_index():
 def register():
     if request.method == 'POST':
         username = request.form['username']
-        password = generate_password_hash(request.form['password'])
+        password = request.form['password']
         
        existing_user = User.query.filter_by(username=username).first()
         if existing_user:
             return "Nama pengguna sudah wujud. Sila guna nama lain.", 400
 
-        # Automatically assign 'admin' role to specific username
-        if username == 'adminvitamind':  # change this to your admin username
+        
+        if username == 'adminvitamind': 
             role = 'admin'
         else:
             role = 'user'
@@ -109,6 +109,10 @@ def register():
         db.session.commit()
 
         return redirect(url_for('login'))
+
+except Exception as e:
+            print("🚨 Registration Error:", e)
+            return "Telah berlaku ralat semasa pendaftaran. Sila cuba lagi.", 500
 
     return render_template('register.html')
 
