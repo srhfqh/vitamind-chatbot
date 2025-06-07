@@ -120,22 +120,28 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('login'))
+from flask import session
 
-# Dummy placeholders for required routes
-@app.route('/reason_selection')
+@app.route('/reason_selection', methods=['GET', 'POST'])
 @login_required
 def reason_selection():
+    if request.method == 'POST':
+        # get selected reason from form button
+        selected_reason = request.form.get('reason')
+        if selected_reason:
+            # save reason in user session
+            session['reason'] = selected_reason
+            return redirect(url_for('chat_page'))  # your chat page route
     return render_template('reason_selection.html')
 
-@app.route('/admin_dashboard')
+
+@app.route('/chat')
 @login_required
-def admin_dashboard():
-    return "Admin Dashboard - Coming Soon!"
+def chat_page():
+    reason = session.get('reason', None)
+    # you can pass the reason to your chat page template
+    return render_template('chat.html', reason=reason)
+
 
 # Run the app
 if __name__ == '__main__':
