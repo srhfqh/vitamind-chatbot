@@ -110,9 +110,9 @@ def register():
 
         return redirect(url_for('login'))
 
-except Exception as e:
-            print("🚨 Registration Error:", e)
-            return "Telah berlaku ralat semasa pendaftaran. Sila cuba lagi.", 500
+    except Exception as e:
+        print("🚨 Registration Error:", e)
+        return "Telah berlaku ralat semasa pendaftaran. Sila cuba lagi.", 500
 
     return render_template('register.html')
 
