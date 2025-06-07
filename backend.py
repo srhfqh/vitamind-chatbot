@@ -124,21 +124,32 @@ def login():
         try:
             username = request.form['username']
             password = request.form['password']
+            print(f"📥 Received login for username: {username}")
+
             user = User.query.filter_by(username=username).first()
+
+            if user:
+                print(f"🔐 Found user in DB: {user.username}")
+            else:
+                print("❌ User not found.")
 
             if user and check_password_hash(user.password, password):
                 login_user(user)
+                print("✅ Login successful.")
                 if user.role == 'admin':
                     return redirect(url_for('admin_dashboard'))
                 else:
                     return redirect(url_for('reason_selection'))
-            return 'Login failed'
+            else:
+                print("❌ Invalid credentials.")
 
         except Exception as e:
-            print("🚨 Login Error:", e)
-            return "Ralat semasa login. Sila cuba lagi.", 500
+            print(f"🚨 Login Error: {e}")  # Debug print for Render logs
+
+        return 'Ralat semasa login. Sila cuba lagi.'
 
     return render_template('login.html')
+
 
 
 
