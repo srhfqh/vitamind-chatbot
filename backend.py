@@ -91,7 +91,8 @@ def register():
     if request.method == 'POST':
         try:
             username = request.form['username']
-            password = generate_password_hash(request.form['password'])
+            raw_password = request.form['password']
+            hashed_password = generate_password_hash(raw_password)
 
             # Check if the user already exists
             existing_user = User.query.filter_by(username=username).first()
