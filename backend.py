@@ -43,10 +43,15 @@ load_dotenv()
 
 def mental_health_chatbot(user_input):
     user_input = user_input.lower()
+    selected_reason = session.get('reason', None)
     best_match = None
     highest_ratio = 0.0
 
     for entry in chatbot_dataset:
+         # Only compare entries with the matching reason
+        if entry.get('reason') != selected_reason:
+            continue
+
         dataset_input = entry['user_input'].lower()
         ratio = difflib.SequenceMatcher(None, user_input, dataset_input).ratio()
 
