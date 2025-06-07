@@ -121,17 +121,25 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        user = User.query.filter_by(username=username).first()
-        if user and check_password_hash(user.password, password):
-            login_user(user)
-            if user.role == 'admin':
-                return redirect(url_for('admin_dashboard'))
-            else:
-                return redirect(url_for('reason_selection'))
-        return 'Login failed'
+        try:
+            username = request.form['username']
+            password = request.form['password']
+            user = User.query.filter_by(username=username).first()
+
+            if user and check_password_hash(user.password, password):
+                login_user(user)
+                if user.role == 'admin':
+                    return redirect(url_for('admin_dashboard'))
+                else:
+                    return redirect(url_for('reason_selection'))
+            return 'Login failed'
+
+        except Exception as e:
+            print("🚨 Login Error:", e)
+            return "Ralat semasa login. Sila cuba lagi.", 500
+
     return render_template('login.html')
+
 
 
 from flask import session
