@@ -91,20 +91,20 @@ def register():
     if request.method == 'POST':
         try:
             username = request.form['username']
-            password = request.form['password']
+            password = generate_password_hash(request.form['password'])
 
             # Check if the user already exists
             existing_user = User.query.filter_by(username=username).first()
             if existing_user:
-                return "Nama pengguna sudah wujud. Sila guna nama lain.", 400
+                return "Nama pengguna sudah wujud. Sila guna nama lain."
 
             # Automatically assign admin role to a specific username
-            if username == 'adminvitamind':  # <-- set your admin username here
+            if username.lower() == 'adminvitamind': 
                 role = 'admin'
             else:
                 role = 'user'
 
-            hashed_password = generate_password_hash(password)
+           
             new_user = User(username=username, password=hashed_password, role=role)
             db.session.add(new_user)
             db.session.commit()
