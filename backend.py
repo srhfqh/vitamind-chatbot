@@ -147,6 +147,9 @@ def admin_dashboard():
         return redirect(url_for('reason_selection'))
     return render_template('admin_dashboard.html')
 
+with app.app_context():
+    db.create_all()
+
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
