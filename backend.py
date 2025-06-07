@@ -89,30 +89,31 @@ def serve_index():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        
-       existing_user = User.query.filter_by(username=username).first()
-        if existing_user:
-            return "Nama pengguna sudah wujud. Sila guna nama lain.", 400
+        try:
+            username = request.form['username']
+            password = request.form['password']
 
-        
-        if username == 'adminvitamind': 
-            role = 'admin'
-        else:
-            role = 'user'
+            # Check if the user already exists
+            existing_user = User.query.filter_by(username=username).first()
+            if existing_user:
+                return "Nama pengguna sudah wujud. Sila guna nama lain.", 400
 
-        # Create user
-        hashed_password = generate_password_hash(password)
-        new_user = User(username=username, password=hashed_password, role=role)
-        db.session.add(new_user)
-        db.session.commit()
+            # Automatically assign admin role to a specific username
+            if username == 'adminvitamind':  # <-- set your admin username here
+                role = 'admin'
+            else:
+                role = 'user'
 
-        return redirect(url_for('login'))
+            hashed_password = generate_password_hash(password)
+            new_user = User(username=username, password=hashed_password, role=role)
+            db.session.add(new_user)
+            db.session.commit()
 
-    except Exception as e:
-        print("🚨 Registration Error:", e)
-        return "Telah berlaku ralat semasa pendaftaran. Sila cuba lagi.", 500
+            return redirect(url_for('login'))
+
+        except Exception as e:
+            print("🚨 Registration Error:", e)
+            return "Telah berlaku ralat semasa pendaftaran. Sila cuba lagi.", 500
 
     return render_template('register.html')
 
