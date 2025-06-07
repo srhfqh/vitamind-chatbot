@@ -124,27 +124,27 @@ def login():
         try:
             username = request.form['username']
             password = request.form['password']
-            print(f"📥 Received login for username: {username}")
+            print(f"📥 Trying login: username={username}, password={password}")
 
             user = User.query.filter_by(username=username).first()
+            print(f"🔍 DB user: {user}")
 
             if user:
-                print(f"🔐 Found user in DB: {user.username}")
-            else:
-                print("❌ User not found.")
+                print(f"🧂 Hashed password in DB: {user.password}")
+                print(f"✅ Password match: {check_password_hash(user.password, password)}")
 
             if user and check_password_hash(user.password, password):
                 login_user(user)
-                print("✅ Login successful.")
+                print(f"✅ Login success: {user.username}, role={user.role}")
                 if user.role == 'admin':
                     return redirect(url_for('admin_dashboard'))
                 else:
                     return redirect(url_for('reason_selection'))
             else:
-                print("❌ Invalid credentials.")
+                print("❌ Login failed: Invalid username or password")
 
         except Exception as e:
-            print(f"🚨 Login Error: {e}")  # Debug print for Render logs
+            print(f"🚨 Error during login: {e}")
 
         return 'Ralat semasa login. Sila cuba lagi.'
 
