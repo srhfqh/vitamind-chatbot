@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pilih Sebab - VitaMind</title>
+<style>
+  body {
+    background-color: #d4f0e7; /* pastel green */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2f4f4f;
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+  h2 {
+    margin-bottom: 2rem;
+  }
+  .reasons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: 600px;
+    justify-content: center;
+  }
+  button.reason-btn {
+    background-color: #8fd9a8;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #004d26;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 140px;
+  }
+  button.reason-btn:hover {
+    background-color: #70b885;
+  }
+</style>
+</head>
+<body>
+  <h2>Sila pilih sebab anda di sini</h2>
+  <div class="reasons-container">
+    <form method="POST" action="{{ url_for('start_chat') }}">
+      <button class="reason-btn" name="reason" value="Stress" type="submit">Stress</button>
+      <button class="reason-btn" name="reason" value="Kesunyian" type="submit">Kesunyian</button>
+      <button class="reason-btn" name="reason" value="Terlalu banyak kerja" type="submit">Terlalu banyak kerja</button>
+      <button class="reason-btn" name="reason" value="Masalah keluarga" type="submit">Masalah keluarga</button>
+      <button class="reason-btn" name="reason" value="Masalah hubungan" type="submit">Masalah hubungan</button>
+      <button class="reason-btn" name="reason" value="Kebimbangan" type="submit">Kebimbangan</button>
+    </form>
+  </div>
+</body>
+</html>
+
