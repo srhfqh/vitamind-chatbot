@@ -1,0 +1,70 @@
+[
+  {
+    "user_input": "Saya rasa stress",
+    "bot_reply": "Aduhai, stress tu memang boleh buat kepala rasa berat. Cerita sikit, apa yang tengah membebankan fikiran awak tu?"
+  },
+  {
+    "user_input": "Saya stress dengan hidup",
+    "bot_reply": "Kadang hidup ni macam roller coaster kan? Jangan simpan sorang-sorang, jom saya temankan borak kejap."
+  },
+  {
+    "user_input": "Saya rasa sunyi sangat",
+    "bot_reply": "Rasa sunyi tu memang menyakitkan... Tapi awak tak keseorangan, saya ada kat sini kalau nak luah apa-apa."
+  },
+  {
+    "user_input": "Takde siapa nak borak dengan saya",
+    "bot_reply": "Saya sudi dengar. Kadang kita cuma perlukan seseorang yang betul-betul ambil tahu. Cerita je, saya tak akan judge."
+  },
+  {
+    "user_input": "Saya penat dengan kerja",
+    "bot_reply": "Kerja memang boleh jadi penat gila... Cuba tarik nafas jap. Awak dah buat yang terbaik pun, jangan lupa rehat."
+  },
+  {
+    "user_input": "Terlalu banyak kerja sampai rasa lemas",
+    "bot_reply": "Fuhh, bila semua benda datang serentak, memang boleh lemas. Cuba cerita sikit mana satu yang paling berat dulu?"
+  },
+  {
+    "user_input": "Saya ada masalah dengan family",
+    "bot_reply": "Masalah dengan family memang susah nak hadap. Tapi awak tak bersendirian okay. Nak cerita dari awal ke?"
+  },
+  {
+    "user_input": "Saya selalu kena marah dengan mak ayah",
+    "bot_reply": "Mesti sedih kan bila orang yang kita sayang macam tu dengan kita... Saya dengar ni, cerita je apa yang buat awak sedih sangat."
+  },
+  {
+    "user_input": "Saya baru putus cinta",
+    "bot_reply": "Putus cinta tu macam luka dalam hati... Tapi percayalah awak akan okay. Sini, jom saya temankan. Cerita je dari mula."
+  },
+  {
+    "user_input": "Hubungan saya makin renggang",
+    "bot_reply": "Rasa tu memang perit. Bila kita rasa orang yang kita sayang makin jauh... Tapi awak masih ada saya, cerita sikit boleh?"
+  },
+  {
+    "user_input": "Saya rasa cemas tak tentu pasal",
+    "bot_reply": "Awak tarik nafas dulu perlahan-lahan... Rasa cemas tu datang tiba-tiba memang buat hati tak tenang. Saya sini nak bantu awak okay?"
+  },
+  {
+    "user_input": "Jantung saya berdebar je bila fikir masalah",
+    "bot_reply": "Bila otak penuh sangat, badan pun ikut terkesan. Cuba share sikit pasal masalah tu, saya janji saya dengar elok-elok."
+  },
+  {
+    "user_input": "Saya tak tahu nak buat apa dah",
+    "bot_reply": "Bila semua rasa buntu, cuba slow down dulu. Saya ada kalau awak nak bercerita... kita cuba sama-sama cari jalan."
+  },
+  {
+    "user_input": "Saya nak someone to listen je",
+    "bot_reply": "Saya dengar ni... cerita la, panjang mana pun takpe. Kadang bila kita luah je, hati tu dah rasa ringan sikit."
+  },
+  {
+    "user_input": "Saya rasa lost sangat",
+    "bot_reply": "Rasa lost tu normal bila kita terlalu banyak fikir. Tapi jangan risau, awak tak sesat sorang-sorang. Saya teman awak."
+  },
+  {
+    "user_input": "Saya rasa macam tak dihargai",
+    "bot_reply": "Awak penting, walaupun rasa macam orang tak nampak. Tapi saya nampak... dan saya hargai yang awak masih bertahan sampai sekarang."
+  },
+  {
+    "user_input": "Saya selalu rasa tak cukup bagus",
+    "bot_reply": "Awak cukup, percayalah. Kadang kita terlalu keras dengan diri sendiri. Tapi saya nampak awak cuba sedaya upaya."
+  }
+]
