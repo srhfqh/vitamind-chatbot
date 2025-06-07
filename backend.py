@@ -92,7 +92,7 @@ def register():
         username = request.form['username']
         password = generate_password_hash(request.form['password'])
         
-        admin_username = 'srhfqh'
+        admin_username = 'adminvitamind'
         role = 'admin' if username == admin_username else 'user'
         
         new_user = User(username=username, password=password, role=role)
