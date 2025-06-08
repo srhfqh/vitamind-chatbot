@@ -133,6 +133,7 @@ def login():
             print(f"🔍 DB user: {user}")
 
             if user:
+                print(f"User entered password: {password}")
                 print(f"🧂 Hashed password in DB: {user.password}")
                 print(f"✅ Password match: {check_password_hash(user.password, password)}")
 
