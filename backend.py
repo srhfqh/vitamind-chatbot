@@ -10,15 +10,15 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import json
 import difflib
 
-# Load the custom chatbot dataset
+
 with open('vitamind_dataset.json', 'r', encoding='utf-8') as f:
     chatbot_dataset = json.load(f)
 
 
-app = Flask(__name__)
+app = Flask(__name__, instance_relative_config=True)
 app.secret_key = os.environ.get('SECRET_KEY', 'vitamind_default_secret_key')
 CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.instance_path, 'users.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -30,7 +30,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
-    role = db.Column(db.String(10))  # 'user' or 'admin'
+    role = db.Column(db.String(10))  
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -169,12 +169,10 @@ from flask import session
 @login_required
 def reason_selection():
     if request.method == 'POST':
-        # get selected reason from form button
         selected_reason = request.form.get('reason')
         if selected_reason:
-            # save reason in user session
             session['reason'] = selected_reason
-            return redirect(url_for('chat_page'))  # your chat page route
+            return redirect(url_for('chat_page'))  
     return render_template('reason_selection.html')
 
 
@@ -182,7 +180,7 @@ def reason_selection():
 @login_required
 def chat_page():
     reason = session.get('reason', None)
-    # you can pass the reason to your chat page template
+  
     return render_template('chat.html', reason=reason)
 
 @app.route('/admin')
@@ -197,10 +195,6 @@ def debug_users():
     users = User.query.all()
     user_list = [{'id': u.id, 'username': u.username, 'role': u.role} for u in users]
     return jsonify(user_list)
-
-
-db_path = r"C:\Users\acer\Desktop\fyp\VitaMind3\real\New folder\vitamind-chatbot\instance\users.db"
-print("DB Path:", db_path)
 
 
 with app.app_context():
