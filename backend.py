@@ -34,6 +34,13 @@ class User(UserMixin, db.Model):
     role = db.Column(db.String(50), nullable=False)
     last_login = db.Column(db.DateTime, default=datetime.utcnow)
 
+class ChatLog(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    reason = db.Column(db.String(100))
+    message = db.Column(db.String(500))
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
 
 @login_manager.user_loader
 def load_user(user_id):
