@@ -31,7 +31,9 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
-    role = db.Column(db.String(10))  
+    role = db.Column(db.String(10))
+    last_login = db.Column(db.DateTime)
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -69,7 +71,7 @@ def mental_health_chatbot(user_input):
 
 
 
-@app.route('/chat', methods=['POST'])
+@app.route('/chat_api', methods=['POST'])
 def chat():
     user_message = request.json.get("message")
     if not user_message:
@@ -145,6 +147,8 @@ def login():
                 print(f"✅ Password match: {check_password_hash(user.password, password)}")
 
             if user and check_password_hash(user.password, password):
+                user.last_login = datetime.datetime.now()
+                db.session.commit()
                 login_user(user)
                 print(f"✅ Login success: {user.username}, role={user.role}")
                 if user.role == 'admin':
@@ -191,7 +195,7 @@ def admin_dashboard():
         return redirect(url_for('reason_selection'))
 
     users = User.query.all()
-    return render_template('admin_dashboard.html')
+    return render_template('admin_dashboard.html', users=users)
 
 @app.route('/admin/add_dataset_entry', methods=['POST'])
 @login_required
@@ -204,7 +208,7 @@ def add_dataset_entry():
         "user_input": request.form.get('user_input'),
         "bot_reply": request.form.get('bot_reply')
     }
-     with open('vitamind_dataset.json', 'r+', encoding='utf-8') as f:
+    with open('vitamind_dataset.json', 'r+', encoding='utf-8') as f:
         data = json.load(f)
         data.append(new_entry)
         f.seek(0)
@@ -237,6 +241,13 @@ def debug_users():
     users = User.query.all()
     user_list = [{'id': u.id, 'username': u.username, 'role': u.role} for u in users]
     return jsonify(user_list)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
 
 
 with app.app_context():
