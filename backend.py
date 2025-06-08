@@ -82,6 +82,14 @@ def chat():
 def serve_index():
     return send_from_directory('.', 'index.html')
 
+@app.route('/start_chat', methods=['POST'])
+@login_required
+def start_chat():
+    reason = request.form.get('reason')
+    session['reason'] = reason
+    return redirect(url_for('chat'))
+
+
 
 
 @app.route('/register', methods=['GET', 'POST'])
