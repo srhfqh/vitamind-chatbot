@@ -6,7 +6,8 @@ from flask_cors import CORS
 import os
 from dotenv import load_dotenv
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from flask import send_file
+import datetime
 import json
 import difflib
 
@@ -188,7 +189,48 @@ def chat_page():
 def admin_dashboard():
     if current_user.role != 'admin':
         return redirect(url_for('reason_selection'))
+
+    users = User.query.all()
     return render_template('admin_dashboard.html')
+
+@app.route('/admin/add_dataset_entry', methods=['POST'])
+@login_required
+def add_dataset_entry():
+    if current_user.role != 'admin':
+        return redirect(url_for('reason_selection'))
+
+    new_entry = {
+        "reason": request.form.get('reason'),
+        "user_input": request.form.get('user_input'),
+        "bot_reply": request.form.get('bot_reply')
+    }
+     with open('vitamind_dataset.json', 'r+', encoding='utf-8') as f:
+        data = json.load(f)
+        data.append(new_entry)
+        f.seek(0)
+        json.dump(data, f, indent=4, ensure_ascii=False)
+        f.truncate()
+
+    return redirect(url_for('admin_dashboard'))
+
+@app.route('/admin/export_dataset')
+@login_required
+def export_dataset():
+    if current_user.role != 'admin':
+        return redirect(url_for('reason_selection'))
+    return send_file('vitamind_dataset.json', as_attachment=True)
+
+@app.route('/admin/upload_dataset', methods=['POST'])
+@login_required
+def upload_dataset():
+    if current_user.role != 'admin':
+        return redirect(url_for('reason_selection'))
+
+    file = request.files['dataset_file']
+    if file and file.filename.endswith('.json'):
+        file.save('vitamind_dataset.json')
+        return redirect(url_for('admin_dashboard'))
+    return "Fail tidak sah. Hanya .json dibenarkan.", 400
 
 @app.route('/debug-users')
 def debug_users():
