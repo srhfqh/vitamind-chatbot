@@ -52,7 +52,7 @@ def mental_health_chatbot(user_input):
     highest_ratio = 0.0
 
     for entry in chatbot_dataset:
-         # Only compare entries with the matching reason
+         
         if entry.get('reason') != selected_reason:
             continue
 
@@ -147,7 +147,7 @@ def login():
                 print(f"✅ Password match: {check_password_hash(user.password, password)}")
 
             if user and check_password_hash(user.password, password):
-                user.last_login = datetime.datetime.now()
+                user.last_login = datetime.now()
                 db.session.commit()
                 login_user(user)
                 print(f"✅ Login success: {user.username}, role={user.role}")
