@@ -16,6 +16,7 @@ with open('vitamind_dataset.json', 'r', encoding='utf-8') as f:
 
 
 app = Flask(__name__)
+app.secret_key = os.environ.get('SECRET_KEY', 'vitamind_default_secret_key')
 CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
