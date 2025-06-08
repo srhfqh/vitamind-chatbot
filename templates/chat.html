@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VitaMind – Chatbot Kesihatan Mental</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #f9f9f9;
+      color: #222;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header {
+      background-color: #6FAF7A;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    .tagline {
+      font-size: 1rem;
+      font-style: italic;
+    }
+
+    .page-layout {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .quote-section {
+      width: 25%;
+      background-color: #fdfce7;
+      padding: 2rem;
+      color: #4b4b00;
+      font-family: 'Caveat', cursive;
+      font-size: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      border-right: 2px dashed #d4d39c;
+    }
+
+    .note-heading {
+      background-color: #fffcc0;
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+      transform: rotate(-1.5deg);
+      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .note-heading::before {
+      content: "📌";
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+    }
+
+    .quote-box {
+      background-color: #fffcc0;
+      padding: 1.2rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
+      transform: rotate(-2deg);
+      max-width: 240px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .quote-box:nth-child(3) {
+      background-color: #ffe9ec;
+      transform: rotate(2deg);
+    }
+
+    .quote-box:nth-child(4) {
+      background-color: #dfffe7;
+      transform: rotate(-1deg);
+    }
+
+    .chatbot-section {
+      width: 75%;
+      padding: 2rem;
+      min-height: 90vh;
+      position: relative;
+      background: linear-gradient(to bottom right, #f1fef4, #d3f0e0);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      overflow-x: hidden;
+
+    }
+
+    .floating-gif {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      width: 80px;
+      z-index: 10;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .chat-container {
+      width: 100%;
+      height: 75vh;
+      max-width: 100%;
+      background-color: white;
+      padding: 1.5rem 1.5rem 1rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    #chat-box {
+      flex: 1;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 1rem;
+      background: #fff;
+     
+    }
+
+    .chat-message {
+      margin-bottom: 1rem;
+    }
+
+    .chat-message.user {
+      text-align: right;
+    }
+
+    .chat-message.bot {
+      text-align: left;
+    }
+
+    .chat-message .bubble {
+      display: inline-block;
+      padding: 10px 15px;
+      border-radius: 20px;
+      max-width: 70%;
+    }
+
+    .chat-message.user .bubble {
+      background: #6FAF7A;
+      color: white;
+    }
+
+    .chat-message.bot .bubble {
+      background: #e6e6e6;
+      color: #000;
+    }
+
+    .input-group {
+      gap: 0.5rem;
+      display: flex;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .input-group input {
+  flex: 1;
+}
+.input-group .btn {
+  flex-shrink: 0;
+}
+
+
+    
+    .clear-btn {
+      background: transparent;
+      color: #555;
+      border: none;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      float: right;
+    }
+
+    .clear-btn:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background-color: #6FAF7A;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    #emoji-container {
+      position: relative;
+    }
+    
+
+    @media (max-width: 768px) {
+      .page-layout {
+        flex-direction: column;
+      }
+
+      .quote-section {
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-top: 2px dashed #d4d39c;
+    border-right: none;
+    border-left: none;
+  }
+
+
+      .quote-section, .chatbot-section {
+        width: 100%;
+      }
+
+      .chatbot-section {
+    min-height: 100vh;
+        height: auto;
+    padding: 1rem 0.5rem;
+        display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+      .chat-container {
+        height: auto;
+        padding: 1rem 0.8rem;
+        min-height: 80vh;
+        flex-grow: 1;
+  }
+
+       #chat-box {
+    min-height: 60vh;
+         font-size: 0.95rem;
+    line-height: 1.4;
+    padding: 0.8rem;
+         max-height: none;
+         overflow-y: auto;
+       }
+
+        .chat-message .bubble {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+  }
+
+  .chat-message.user .bubble,
+  .chat-message.bot .bubble {
+    max-width: 90%;
+  }
+
+
+      .floating-gif {
+        display: none;
+      }
+
+      .quote-box {
+  
+        font-size: 1.1rem;
+        transform: none !important;
+        padding: 0.8rem 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .note-heading {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+
+       
+      }
+
+      .input-group {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+      }
+
+      .input-group input,
+      .input-group button {
+        width: 100%;
+        font-size: 1rem;
+      }
+
+      #user-message {
+        width: 100%;
+  min-height: 60px;
+  max-height: 120px;
+  font-size: 1rem;
+  padding: 10px;
+  resize: vertical;
+        line-height: 1.5;
+  overflow-y: auto;
+  flex: none;
+}
+
+      #emoji-container {
+        width: 100%
+  display: flex;
+  justify-content: flex-start;
+}
+
+#emoji-button {
+font-size: 1.5rem;
+    padding: 6px 12px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}
+
+      .input-group .btn {
+   width: 100%;
+}
+
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">
+      <div class="brand">VitaMind</div>
+      <div class="tagline">Teman AI Sembang Anda</div>
+    </div>
+
+    <div class="page-layout flex-wrap flex-md-nowrap">
+      <div class="quote-section order-2 order-md-1">
+        <div class="note-heading">Nota Harian</div>
+        <div class="quote-box">"Tidur cukup pun salah satu self-care tau 😴"</div>
+        <div class="quote-box">"Self-love tu bukan manja, tu penting 🧡"</div>
+        <div class="quote-box">"Dunia ni kadang serabut, tapi at least nasi lemak tetap sedap"</div>
+      </div>
+
+       <div class="chatbot-section order-1 order-md-2">
+        <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3g5NmpjMzhpcHd0dm83cm95dzR2N2dtend5cjBxMXk2ZmdhNmdmMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7uLItJVS8oaPvaoALH/giphy.gif" class="floating-gif" alt="Relaxing animation">
+        <div class="chat-container">
+          <div id="chat-box"></div>
+          <div class="input-group d-flex flex-column flex-sm-row">
+           <textarea id="user-message" class="form-control" rows="1" placeholder="Tulis mesej anda..." onkeydown="checkEnter(event)"></textarea>
+
+              <button type="button" class="btn btn-light" id="emoji-button">😊</button>
+              <emoji-picker id="emoji-picker" style="display:none; position: absolute; bottom: 50px; right: 0; z-index: 1000;"></emoji-picker>
+            </div>
+            <button class="btn" style="background-color: #6FAF7A; color: white;" onclick="sendMessages()">Hantar</button>
+          </div>
+          <button class="clear-btn" onclick="clearChat()">Kosongkan Chat</button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      Developed by Nur Sarah Afiqah Binti Rosli @ UniKL MIIT 2025
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js" type="module"></script>
+  <script>
+    function clearChat() {
+      document.getElementById("chat-box").innerHTML = '';
+      showGreeting();
+    }
+
+    function showGreeting() {
+      const chatBox = document.getElementById("chat-box");
+      chatBox.innerHTML += `
+        <div class="chat-message bot">
+          <div class="bubble">Hai! Saya VitaMind. Bagaimana saya boleh membantu anda hari ini?</div>
+        </div>
+      `;
+    }
+
+    async function sendMessage(userMessage) {
+      if (!userMessage) return alert("Sila masukkan mesej.");
+      const chatBox = document.getElementById("chat-box");
+
+      chatBox.innerHTML += `
+        <div class="chat-message user">
+          <div class="bubble"><strong>Anda:</strong> ${userMessage}</div>
+        </div>
+      `;
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      try {
+        const response = await fetch('/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: userMessage })
+        });
+        const data = await response.json();
+
+        chatBox.innerHTML += `
+          <div class="chat-message bot">
+            <div class="bubble"><strong>VitaMind:</strong> ${data.response}</div>
+          </div>
+        `;
+      } catch {
+        chatBox.innerHTML += `
+          <div class="chat-message bot">
+            <div class="bubble bg-danger text-white">Maaf, terdapat masalah dengan pelayan.</div>
+          </div>
+        `;
+      }
+
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function checkEnter(event) {
+      if (event.key === "Enter") sendMessages();
+    }
+
+    function sendMessages() {
+      const input = document.getElementById("user-message");
+      const message = input.value.trim();
+      sendMessage(message);
+      input.value = '';
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      showGreeting();
+      const button = document.getElementById('emoji-button');
+      const picker = document.getElementById('emoji-picker');
+      const input = document.getElementById('user-message');
+
+      button.addEventListener('click', () => {
+        picker.style.display = picker.style.display === 'none' ? 'block' : 'none';
+      });
+
+      picker.addEventListener('emoji-click', event => {
+        input.value += event.detail.unicode;
+        input.focus();
+        picker.style.display = 'none';
+      });
+
+      const textarea = document.getElementById("user-message");
+textarea.addEventListener("input", () => {
+  textarea.style.height = "auto";
+  textarea.style.height = textarea.scrollHeight + "px";
+});
+
+    });
+  </script>
+</body>
+</html>
