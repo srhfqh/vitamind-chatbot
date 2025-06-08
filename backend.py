@@ -7,9 +7,9 @@ import os
 from dotenv import load_dotenv
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import send_file
-import datetime
 import json
 import difflib
+from datetime import datetime
 
 
 with open('vitamind_dataset.json', 'r', encoding='utf-8') as f:
@@ -29,10 +29,10 @@ login_manager.init_app(app)
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(150), unique=True)
-    password = db.Column(db.String(150))
-    role = db.Column(db.String(10))
-    last_login = db.Column(db.DateTime)
+    username = db.Column(db.String(150), nullable=False, unique=True)
+    password = db.Column(db.String(150), nullable=False)
+    role = db.Column(db.String(50), nullable=False)
+    last_login = db.Column(db.DateTime, default=datetime.utcnow)
 
 
 @login_manager.user_loader
