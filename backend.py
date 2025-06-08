@@ -188,10 +188,9 @@ def admin_dashboard():
 @app.route('/debug-users')
 def debug_users():
     users = User.query.all()
-    output = ""
-    for u in users:
-        output += f"Username: {u.username}, Hashed password: {u.password}, Role: {u.role}<br>"
-    return output
+    user_list = [{'id': u.id, 'username': u.username, 'role': u.role} for u in users]
+    return jsonify(user_list)
+
 
 db_path = r"C:\Users\acer\Desktop\fyp\VitaMind3\real\New folder\vitamind-chatbot\instance\users.db"
 print("DB Path:", db_path)
