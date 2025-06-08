@@ -77,14 +77,11 @@
   <div class="container">
     <h2>Log Masuk</h2>
     <form method="POST" action="{{ url_for('login') }}">
-      <label for="username">Nama Pengguna</label>
-      <input type="text" id="username" name="username" required />
+  <input name="username" type="text" />
+  <input name="password" type="password" />
+  <button type="submit">Log Masuk</button>
+</form>
 
-      <label for="password">Kata Laluan</label>
-      <input type="password" id="password" name="password" required />
-
-      <button type="submit">Log Masuk</button>
-    </form>
     <div class="register-link">
       Belum ada akaun? <a href="{{ url_for('register') }}">Daftar di sini</a>
     </div>
