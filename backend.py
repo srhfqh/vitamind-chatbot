@@ -193,6 +193,9 @@ def debug_users():
         output += f"Username: {u.username}, Hashed password: {u.password}, Role: {u.role}<br>"
     return output
 
+db_path = r"C:\Users\acer\Desktop\fyp\VitaMind3\real\New folder\vitamind-chatbot\instance\users.db"
+print("DB Path:", db_path)
+
 
 with app.app_context():
     db.create_all()
