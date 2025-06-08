@@ -82,9 +82,6 @@ def serve_index():
     return send_from_directory('.', 'index.html')
 
 
-    import os
-    
-
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -115,7 +112,7 @@ def register():
             return redirect(url_for('login'))
 
         except Exception as e:
-            print("🚨 Registration Error:", e)
+            print("🚨 Registration Error:", e, flush=True)
             return "Telah berlaku ralat semasa pendaftaran. Sila cuba lagi.", 500
 
     return render_template('register.html')
@@ -145,10 +142,10 @@ def login():
                 else:
                     return redirect(url_for('reason_selection'))
             else:
-                print("❌ Login failed: Invalid username or password")
+                print("❌ Login failed: Invalid username or password", flush=True)
 
         except Exception as e:
-            print(f"🚨 Error during login: {e}")
+            print(f"🚨 Error during login: {e}", flush=True)
 
         return 'Ralat semasa login. Sila cuba lagi.'
 
@@ -203,4 +200,4 @@ with app.app_context():
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, debug=True)
