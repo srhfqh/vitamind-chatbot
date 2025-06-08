@@ -185,6 +185,15 @@ def admin_dashboard():
         return redirect(url_for('reason_selection'))
     return render_template('admin_dashboard.html')
 
+@app.route('/debug-users')
+def debug_users():
+    users = User.query.all()
+    output = ""
+    for u in users:
+        output += f"Username: {u.username}, Hashed password: {u.password}, Role: {u.role}<br>"
+    return output
+
+
 with app.app_context():
     db.create_all()
 
