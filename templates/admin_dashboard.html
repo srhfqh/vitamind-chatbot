@@ -3,57 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard Admin - VitaMind</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
+
+        :root {
+            --bg-main: #eafaf1;
+            --card-bg: #ffffff;
+            --accent: #b7e4c7;
+            --primary: #81c784;
+            --primary-dark: #4caf50;
+            --text-dark: #2e7d32;
+            --border-light: #c8e6c9;
+        }
+        
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: #0f2e1d;
-            color: white;
+            color: var(--text-dark);
             margin: 0;
             padding: 0;
         }
         header {
-            background-color: #14532d;
-            padding: 1rem;
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 1.2rem;
             text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
         h1 {
             margin: 0;
+            font-size: 1.8rem;
         }
         section {
-            padding: 20px;
+            padding: 30px;
+            max-width: 900px;
+            margin: auto;
         }
         .card {
-            background-color: #1f4032;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        h2 {
+            margin-top: 0;
+            color: var(--text-dark);
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            background-color: #264d3b;
+            margin-top: 15px;
         }
         table, th, td {
-            border: 1px solid #347a5b;
+            border: 1px solid var(--border-light);
         }
-        th, td {
+         th {
+            background-color: var(--accent);
             padding: 10px;
             text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 10px;
         }
         .btn {
-            background-color: #22c55e;
+            background-color: var(--primary);
             border: none;
-            padding: 10px 15px;
-            color: black;
+            padding: 10px 18px;
+            color: white;
+            font-weight: 600;
+            border-radius: 6px;
             cursor: pointer;
-            font-weight: bold;
+            transition: background-color 0.3s ease;
         }
         input, select, textarea {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             margin-top: 6px;
-            border-radius: 5px;
-            border: none;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #d4d4d4;
+            font-size: 15px;
+            background-color: #f9f9f9;
+        }
+         .btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        a.btn {
+            text-decoration: none;
+            display: inline-block;
         }
     </style>
 </head>
@@ -94,7 +135,7 @@
             <button class="btn" type="submit">Muat Naik</button>
         </form>
         <br>
-        <a class="btn" href="/admin/export_dataset">Muat Turun Dataset</a>
+        <a class="btn" href="/admin/export_dataset">📁 Muat Turun Dataset</a>
     </section>
 </body>
 </html>
