@@ -1,27 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ms">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard - VitaMind</title>
+    <title>Dashboard Admin - VitaMind</title>
     <style>
         body {
-            font-family: sans-serif;
-            background-color: #f9f9f9;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #0f2e1d;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #14532d;
+            padding: 1rem;
             text-align: center;
-            padding: 50px;
         }
         h1 {
-            color: #c0392b;
+            margin: 0;
         }
-        a {
-            text-decoration: none;
-            color: #2980b9;
+        section {
+            padding: 20px;
+        }
+        .card {
+            background-color: #1f4032;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #264d3b;
+        }
+        table, th, td {
+            border: 1px solid #347a5b;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .btn {
+            background-color: #22c55e;
+            border: none;
+            padding: 10px 15px;
+            color: black;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            border-radius: 5px;
+            border: none;
         }
     </style>
 </head>
 <body>
-    <h1>Selamat datang ke Admin Dashboard!</h1>
-    <p>Anda telah berjaya login sebagai admin.</p>
-    <a href="/logout">Logout</a>
+    <header>
+        <h1>Dashboard Admin - VitaMind</h1>
+    </header>
+
+    <section class="card">
+        <h2>Senarai Pengguna</h2>
+        <table>
+            <tr><th>ID</th><th>Nama Pengguna</th><th>Peranan</th></tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.role }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+
+    <section class="card">
+        <h2>Dataset Chatbot</h2>
+        <form action="/admin/add_dataset_entry" method="POST">
+            <label>Alasan:</label>
+            <input type="text" name="reason" required>
+            <label>Mesej Pengguna:</label>
+            <input type="text" name="user_input" required>
+            <label>Balasan Chatbot:</label>
+            <textarea name="bot_reply" required></textarea>
+            <button class="btn" type="submit">Tambah</button>
+        </form>
+        <br>
+        <form action="/admin/upload_dataset" method="POST" enctype="multipart/form-data">
+            <label>Muat Naik Dataset (JSON):</label>
+            <input type="file" name="dataset_file" accept=".json">
+            <button class="btn" type="submit">Muat Naik</button>
+        </form>
+        <br>
+        <a class="btn" href="/admin/export_dataset">Muat Turun Dataset</a>
+    </section>
 </body>
 </html>
