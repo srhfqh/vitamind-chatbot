@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ms">
 <head>
     <meta charset="UTF-8">
-    <title>Select Your Reason</title>
+    <title>Pilih Sebab Anda</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -59,20 +59,20 @@
 </head>
 <body>
     <div class="container">
-        <h2>How are you feeling today?</h2>
+        <h2>Bagaimana perasaan anda hari ini?</h2>
         <form method="POST" action="{{ url_for('start_chat') }}">
             <select name="reason" required>
-                <option value="" disabled selected>Select a reason</option>
-                <option value="stress">Stress</option>
-                <option value="loneliness">Loneliness</option>
-                <option value="work">Work Pressure</option>
-                <option value="family">Family Issues</option>
-                <option value="relationship">Relationship</option>
-                <option value="anxiety">Anxiety</option>
+                <option value="" disabled selected>Pilih sebab anda</option>
+                <option value="stress">Tekanan</option>
+                <option value="loneliness">Kesunyian</option>
+                <option value="work">Tekanan Kerja</option>
+                <option value="family">Masalah Keluarga</option>
+                <option value="relationship">Hubungan</option>
+                <option value="anxiety">Keresahan</option>
             </select>
-            <button type="submit">Continue</button>
+            <button type="submit">Teruskan</button>
         </form>
-        <div class="note">Your selected reason will help personalize the chatbot’s response 💬</div>
+        <div class="note">Sebab yang anda pilih akan membantu chatbot memberi respon yang lebih sesuai 💬</div>
     </div>
 </body>
 </html>
