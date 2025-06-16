@@ -89,6 +89,9 @@ def chat():
     if not user_message:
         return jsonify({"error": "Mesej pengguna diperlukan"}), 400
 
+    if not current_user.is_authenticated:
+            return jsonify({"error": "Sesi anda telah tamat. Sila login semula."}), 401
+
     bot_response = mental_health_chatbot(user_message)
 
     # Save user message
@@ -110,6 +113,10 @@ def chat():
     db.session.commit()
 
     return jsonify({"response": bot_response})
+
+except Exception as e:
+        print(f"🚨 Chat API error: {e}", flush=True)
+        return jsonify({"error": "Maaf, terdapat masalah dengan pelayan."}), 500
 
 
 @app.route('/')
