@@ -126,6 +126,12 @@
         {% endif %}
     </section>
 
+    <section class="card">
+        <h2>Analitik Sebab Penggunaan Chatbot</h2>
+        <canvas id="reasonChart" width="400" height="200"></canvas>
+    </section>
+
+
 
     <section class="card">
        <h2>Dataset Chatbot</h2>
@@ -147,5 +153,40 @@
         <br>
         <a class="btn" href="/admin/export_dataset">📁 Muat Turun Dataset</a>
     </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // This data should come from your Flask view — pass it in like you do for user_count/chat_count
+    const reasonLabels = {{ reason_labels | tojson }};
+    const reasonCounts = {{ reason_counts | tojson }};
+
+    const ctx = document.getElementById('reasonChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: reasonLabels,
+            datasets: [{
+                label: 'Bilangan Pilihan',
+                data: reasonCounts,
+                backgroundColor: '#81c784',
+                borderColor: '#4caf50',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Bilangan'
+                    }
+                }
+            }
+        }
+    });
+</script>
+
 </body>
 </html>
