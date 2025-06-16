@@ -85,38 +85,40 @@ def mental_health_chatbot(user_input):
 
 @app.route('/chat_api', methods=['POST'])
 def chat():
-    user_message = request.json.get("message")
-    if not user_message:
-        return jsonify({"error": "Mesej pengguna diperlukan"}), 400
+    try:
+        user_message = request.json.get("message")
+        if not user_message:
+            return jsonify({"error": "Mesej pengguna diperlukan"}), 400
 
-    if not current_user.is_authenticated:
+        if not current_user.is_authenticated:
             return jsonify({"error": "Sesi anda telah tamat. Sila login semula."}), 401
 
-    bot_response = mental_health_chatbot(user_message)
+        bot_response = mental_health_chatbot(user_message)
 
-    # Save user message
-    user_log = ChatLog(
-        user_id=current_user.id,
-        reason=session.get('reason'),
-        message=user_message
-    )
-    db.session.add(user_log)
+        # Save user message
+        user_log = ChatLog(
+            user_id=current_user.id,
+            reason=session.get('reason'),
+            message=user_message
+        )
+        db.session.add(user_log)
 
-    # Save bot reply
-    bot_log = ChatLog(
-        user_id=current_user.id,
-        reason=session.get('reason'),
-        message=bot_response
-    )
-    db.session.add(bot_log)
+        # Save bot reply
+        bot_log = ChatLog(
+            user_id=current_user.id,
+            reason=session.get('reason'),
+            message=bot_response
+        )
+        db.session.add(bot_log)
 
-    db.session.commit()
+        db.session.commit()
 
-    return jsonify({"response": bot_response})
-
-except Exception as e:
+        return jsonify({"response": bot_response})
+    
+    except Exception as e:
         print(f"🚨 Chat API error: {e}", flush=True)
         return jsonify({"error": "Maaf, terdapat masalah dengan pelayan."}), 500
+
 
 
 @app.route('/')
@@ -204,10 +206,6 @@ def login():
     return render_template('login.html')
 
 
-
-
-from flask import session
-
 @app.route('/reason_selection', methods=['GET', 'POST'])
 @login_required
 def reason_selection():
@@ -246,7 +244,7 @@ def admin_dashboard():
     reason_counts = [r[1] for r in reason_data]
 
     # Top reason
-    top_reason = max(reason_data, key=lambda x: x[1], default=None)
+    top_reason = max(reason_data, key=lambda x: x[1]) if reason_data else None
 
     return render_template(
         'admin_dashboard.html',
