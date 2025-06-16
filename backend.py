@@ -221,10 +221,25 @@ def reason_selection():
 @login_required
 def chat_page():
     reason = session.get('reason', None)
-
     chat_history = ChatLog.query.filter_by(user_id=current_user.id).order_by(ChatLog.timestamp.asc()).all()
-  
-    return render_template('chat.html', reason=reason)
+    return render_template('chat.html', reason=reason, chat_history=chat_history)
+
+@app.route('/chat/message', methods=['POST'])
+@login_required
+def chat_message():
+    data = request.get_json()
+    message = data.get('message')
+
+    # Example: generate a reply (replace this with your actual logic)
+    reply = f"Saya terima mesej: {message}"
+
+    # Optionally: save to DB
+    new_chat = ChatLog(user_id=current_user.id, message=message, reply=reply)
+    db.session.add(new_chat)
+    db.session.commit()
+
+    return jsonify({'response': reply})
+
 
 @app.route('/admin')
 @login_required
