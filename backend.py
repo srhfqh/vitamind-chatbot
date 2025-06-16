@@ -200,6 +200,8 @@ def reason_selection():
 @login_required
 def chat_page():
     reason = session.get('reason', None)
+
+    chat_history = ChatLog.query.filter_by(user_id=current_user.id).order_by(ChatLog.timestamp.asc()).all()
   
     return render_template('chat.html', reason=reason)
 
