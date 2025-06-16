@@ -34,11 +34,7 @@
             margin: 0;
             font-size: 1.8rem;
         }
-        section {
-            padding: 30px;
-            max-width: 900px;
-            margin: auto;
-        }
+
         .card {
             background-color: var(--card-bg);
             border-radius: 12px;
@@ -96,6 +92,56 @@
             text-decoration: none;
             display: inline-block;
         }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .summary-box, .chart-box, .table-box {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .summary-box h3, .chart-box h3, .table-box h3 {
+            margin-top: 0;
+            color: var(--text-dark);
+        }
+        
+        .table-box table {
+            width: 100%;
+            border-collapse: collapse;
+            display: block;
+            overflow-x: auto;
+        }
+        
+        .table-box th, .table-box td {
+            border: 1px solid var(--border-light);
+            padding: 10px;
+        }
+        
+        .table-box th {
+            background-color: var(--accent);
+        }
+
+        .dataset-box {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .dataset-box h3 {
+            margin-top: 0;
+            color: var(--text-dark);
+        }
+
     </style>
 </head>
 <body>
@@ -103,56 +149,63 @@
         <h1>Dashboard Admin - VitaMind</h1>
     </header>
 
-    <section class="card">
-        <h2>Senarai Pengguna</h2>
-        <table>
-            <tr><th>ID</th><th>Nama Pengguna</th><th>Peranan</th></tr>
-            {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.role }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </section>
+    <div class="dashboard-container">
+  <div class="summary-box">
+    <h3>Total Users</h3>
+    <p>{{ user_count }}</p>
+  </div>
+  <div class="summary-box">
+    <h3>Total Chats</h3>
+    <p>{{ chat_count }}</p>
+  </div>
+  <div class="summary-box">
+    <h3>Top Reason</h3>
+    <p>{{ top_reason[0] if top_reason else 'Tiada data' }}</p>
+  </div>
 
-    <section class="card">
-        <h2>Statistik Sistem</h2>
-        <p><strong>Jumlah Pengguna:</strong> {{ user_count }}</p>
-        <p><strong>Jumlah Mesej Chat:</strong> {{ chat_count }}</p>
-        {% if top_reason %}
-        <p><strong>Sebab Paling Biasa Dipilih:</strong> {{ top_reason[0] }} ({{ top_reason[1] }} kali)</p>
-        {% endif %}
-    </section>
+  <div class="chart-box">
+    <h3>Reason Distribution</h3>
+    <canvas id="reasonChart"></canvas>
+  </div>
 
-    <section class="card">
-        <h2>Analitik Sebab Penggunaan Chatbot</h2>
-        <canvas id="reasonChart" width="400" height="200"></canvas>
-    </section>
+        <div class="dataset-box">
+  <h3>Dataset Chatbot</h3>
+  <form action="/admin/add_dataset_entry" method="POST">
+      <label>Alasan:</label>
+      <input type="text" name="reason" required>
+      <label>Mesej Pengguna:</label>
+      <input type="text" name="user_input" required>
+      <label>Balasan Chatbot:</label>
+      <textarea name="bot_reply" required></textarea>
+      <button class="btn" type="submit">Tambah</button>
+  </form>
+  <br>
+  <form action="/admin/upload_dataset" method="POST" enctype="multipart/form-data">
+      <label>Muat Naik Dataset (JSON):</label>
+      <input type="file" name="dataset_file" accept=".json">
+      <button class="btn" type="submit">Muat Naik</button>
+  </form>
+  <br>
+  <a class="btn" href="/admin/export_dataset">📁 Muat Turun Dataset</a>
+</div>
 
 
-
-    <section class="card">
-       <h2>Dataset Chatbot</h2>
-        <form action="/admin/add_dataset_entry" method="POST">
-            <label>Alasan:</label>
-            <input type="text" name="reason" required>
-            <label>Mesej Pengguna:</label>
-            <input type="text" name="user_input" required>
-            <label>Balasan Chatbot:</label>
-            <textarea name="bot_reply" required></textarea>
-            <button class="btn" type="submit">Tambah</button>
-        </form>
-        <br>
-        <form action="/admin/upload_dataset" method="POST" enctype="multipart/form-data">
-            <label>Muat Naik Dataset (JSON):</label>
-            <input type="file" name="dataset_file" accept=".json">
-            <button class="btn" type="submit">Muat Naik</button>
-        </form>
-        <br>
-        <a class="btn" href="/admin/export_dataset">📁 Muat Turun Dataset</a>
-    </section>
+  <div class="table-box">
+    <h3>Users List</h3>
+    <table>
+      <tr>
+        <th>ID</th><th>Username</th><th>Role</th>
+      </tr>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.role }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
