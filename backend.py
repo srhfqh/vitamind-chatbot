@@ -85,7 +85,9 @@ def chat():
         return jsonify({"error": "Mesej pengguna diperlukan"}), 400
 
 
-   chat_log = ChatLog(
+bot_response = mental_health_chatbot(user_message)
+
+chat_log = ChatLog(
         user_id=current_user.id,
         reason=session.get('reason'),
         message=user_message
@@ -212,10 +214,10 @@ def admin_dashboard():
     user_count = len(users)
 
     # Example logic for chat count and reasons
-    chat_count = db.session.query(ChatHistory).count()
+    chat_count = db.session.query(ChatLog).count()
 
-    reason_data = db.session.query(ChatHistory.reason, db.func.count(ChatHistory.reason))\
-                    .group_by(ChatHistory.reason).all()
+    reason_data = db.session.query(ChatLog.reason, db.func.count(ChatLog.reason))\
+                    .group_by(ChatLog.reason).all()
     reason_labels = [r[0] for r in reason_data]
     reason_counts = [r[1] for r in reason_data]
 
