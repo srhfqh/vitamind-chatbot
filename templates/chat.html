@@ -321,7 +321,7 @@
 }
 
       #emoji-container {
-        width: 100%
+        width: 100%;
   display: flex;
   justify-content: flex-start;
 }
@@ -355,18 +355,21 @@ font-size: 1.5rem;
         <div class="quote-box">"Dunia ni kadang serabut, tapi at least nasi lemak tetap sedap"</div>
       </div>
 
-      <div id="chat-window">
-        {% for chat in chat_history %}
-        <div class="chat-bubble user">{{ chat.message }}</div>
-        <div class="chat-bubble bot">{{ chat.reply }}</div>
-        {% endfor %}
-      </div>
-
-
+     
        <div class="chatbot-section order-1 order-md-2">
         <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3g5NmpjMzhpcHd0dm83cm95dzR2N2dtend5cjBxMXk2ZmdhNmdmMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7uLItJVS8oaPvaoALH/giphy.gif" class="floating-gif" alt="Relaxing animation">
         <div class="chat-container">
-          <div id="chat-box"></div>
+          <div id="chat-box">
+            {% for chat in chat_history %}
+            <div class="chat-message user">
+              <div class="bubble"><strong>Anda:</strong> {{ chat.message }}</div>
+            </div>
+            <div class="chat-message bot">
+              <div class="bubble"><strong>VitaMind:</strong> {{ chat.reply }}</div>
+            </div>
+            {% endfor %}
+          </div>
+
           <div class="input-group d-flex flex-column flex-sm-row">
            <textarea id="user-message" class="form-control" rows="1" placeholder="Tulis mesej anda..." onkeydown="checkEnter(event)"></textarea>
 
@@ -437,12 +440,17 @@ font-size: 1.5rem;
     }
 
     function checkEnter(event) {
-      if (event.key === "Enter") sendMessages();
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault(); 
+    sendMessages();
+      }
     }
+
 
     function sendMessages() {
       const input = document.getElementById("user-message");
       const message = input.value.trim();
+      if (!message) return;
       sendMessage(message);
       input.value = '';
     }
