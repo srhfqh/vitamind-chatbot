@@ -209,19 +209,28 @@ def admin_dashboard():
         return redirect(url_for('reason_selection'))
 
     users = User.query.all()
-    user_count = User.query.count()
-    chat_count = ChatLog.query.count()
+    user_count = len(users)
 
-    # Most selected reason
-    top_reason = db.session.query(
-        ChatLog.reason, func.count(ChatLog.reason)
-    ).group_by(ChatLog.reason).order_by(func.count(ChatLog.reason).desc()).first()
+    # Example logic for chat count and reasons
+    chat_count = db.session.query(ChatHistory).count()
 
-    return render_template('admin_dashboard.html',
-                           users=users,
-                           user_count=user_count,
-                           chat_count=chat_count,
-                           top_reason=top_reason)
+    reason_data = db.session.query(ChatHistory.reason, db.func.count(ChatHistory.reason))\
+                    .group_by(ChatHistory.reason).all()
+    reason_labels = [r[0] for r in reason_data]
+    reason_counts = [r[1] for r in reason_data]
+
+    # Top reason
+    top_reason = max(reason_data, key=lambda x: x[1], default=None)
+
+    return render_template(
+        'admin_dashboard.html',
+        users=users,
+        user_count=user_count,
+        chat_count=chat_count,
+        top_reason=top_reason,
+        reason_labels=reason_labels,
+        reason_counts=reason_counts
+    )
 
 @app.route('/admin/add_dataset_entry', methods=['POST'])
 @login_required
