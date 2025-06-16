@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard Admin - VitaMind</title>
+    <title>Admin Dashboard - VitaMind</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -77,32 +77,15 @@
             grid-column: 1 / span 2;
         }
 
-        .btn-link {
-            display: inline-block;
-            padding: 10px 16px;
-            background-color: var(--primary);
-            color: white;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 10px;
-        }
-
-        .btn-link:hover {
-            background-color: var(--primary-dark);
-        }
-
         #reasonChart {
             max-height: 400px;
             width: 100%;
-}
-
-
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Dashboard Admin - VitaMind</h1>
+        <h1>Admin Dashboard - VitaMind</h1>
     </header>
 
     <div class="dashboard-container">
@@ -112,7 +95,7 @@
         </div>
 
         <div class="table-box">
-            <h3>Users List</h3>
+            <h3>User List</h3>
             <table>
                 <tr>
                     <th>ID</th><th>Username</th><th>Role</th>
@@ -128,7 +111,7 @@
         </div>
 
         <div class="chart-box">
-            <h3>Reason Distribution</h3>
+            <h3>Reason Selection Distribution</h3>
             <canvas id="reasonChart"></canvas>
         </div>
     </div>
@@ -144,7 +127,7 @@
             data: {
                 labels: reasonLabels,
                 datasets: [{
-                    label: 'Bilangan Pilihan',
+                    label: 'Number of Selections',
                     data: reasonCounts,
                     backgroundColor: '#81c784',
                     borderColor: '#4caf50',
@@ -159,7 +142,7 @@
                         beginAtZero: true,
                         title: {
                             display: true,
-                            text: 'Bilangan'
+                            text: 'Count'
                         }
                     }
                 }
