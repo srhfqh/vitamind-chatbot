@@ -428,15 +428,16 @@ font-size: 1.5rem;
             <div class="bubble"><strong>VitaMind:</strong> ${data.response}</div>
           </div>
         `;
+        chatBox.scrollTop = chatBox.scrollHeight;
+        
       } catch {
         chatBox.innerHTML += `
           <div class="chat-message bot">
             <div class="bubble bg-danger text-white">Maaf, terdapat masalah dengan pelayan.</div>
           </div>
         `;
+        chatBox.scrollTop = chatBox.scrollHeight;
       }
-
-      chatBox.scrollTop = chatBox.scrollHeight;
     }
 
     function checkEnter(event) {
