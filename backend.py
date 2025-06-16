@@ -58,6 +58,11 @@ def mental_health_chatbot(user_input):
     best_match = None
     highest_ratio = 0.0
 
+    recent_logs = ChatLog.query.filter_by(user_id=current_user.id).order_by(ChatLog.timestamp.desc()).limit(5).all()
+    history_context = ""
+    for log in reversed(recent_logs):  # Ensure oldest first
+        history_context += f"User: {log.message}\n"
+
     for entry in chatbot_dataset:
          
         if entry.get('reason') != selected_reason:
@@ -84,15 +89,26 @@ def chat():
     if not user_message:
         return jsonify({"error": "Mesej pengguna diperlukan"}), 400
 
-    chat_log = ChatLog(
+    bot_response = mental_health_chatbot(user_message)
+
+    # Save user message
+    user_log = ChatLog(
         user_id=current_user.id,
         reason=session.get('reason'),
         message=user_message
     )
-    db.session.add(chat_log)
+    db.session.add(user_log)
+
+    # Save bot reply
+    bot_log = ChatLog(
+        user_id=current_user.id,
+        reason=session.get('reason'),
+        message=bot_response
+    )
+    db.session.add(bot_log)
+
     db.session.commit()
 
-    bot_response = mental_health_chatbot(user_message)
     return jsonify({"response": bot_response})
 
 
