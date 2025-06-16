@@ -5,7 +5,6 @@
     <title>Dashboard Admin - VitaMind</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
-
         :root {
             --bg-main: #eafaf1;
             --card-bg: #ffffff;
@@ -15,7 +14,7 @@
             --text-dark: #2e7d32;
             --border-light: #c8e6c9;
         }
-        
+
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: #0f2e1d;
@@ -23,6 +22,7 @@
             margin: 0;
             padding: 0;
         }
+
         header {
             background-color: var(--primary-dark);
             color: white;
@@ -30,116 +30,66 @@
             text-align: center;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
+
         h1 {
             margin: 0;
             font-size: 1.8rem;
         }
 
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        h2 {
-            margin-top: 0;
-            color: var(--text-dark);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        table, th, td {
-            border: 1px solid var(--border-light);
-        }
-         th {
-            background-color: var(--accent);
-            padding: 10px;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        td {
-            padding: 10px;
-        }
-        .btn {
-            background-color: var(--primary);
-            border: none;
-            padding: 10px 18px;
-            color: white;
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 6px;
-            margin-bottom: 15px;
-            border-radius: 6px;
-            border: 1px solid #d4d4d4;
-            font-size: 15px;
-            background-color: #f9f9f9;
-        }
-         .btn:hover {
-            background-color: var(--primary-dark);
-        }
-
-        a.btn {
-            text-decoration: none;
-            display: inline-block;
-        }
-
         .dashboard-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: 1fr 2fr;
             grid-gap: 20px;
             padding: 20px;
             max-width: 1200px;
             margin: auto;
         }
 
-        .summary-box, .chart-box, .table-box {
+        .summary-box, .table-box, .chart-box {
             background-color: var(--card-bg);
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
-        
-        .summary-box h3, .chart-box h3, .table-box h3 {
+
+        .summary-box h3, .table-box h3, .chart-box h3 {
             margin-top: 0;
             color: var(--text-dark);
         }
-        
+
         .table-box table {
             width: 100%;
             border-collapse: collapse;
             display: block;
             overflow-x: auto;
         }
-        
+
         .table-box th, .table-box td {
             border: 1px solid var(--border-light);
             padding: 10px;
         }
-        
+
         .table-box th {
             background-color: var(--accent);
         }
 
-        .dataset-box {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        .chart-box {
+            grid-column: 1 / span 2;
         }
-        
-        .dataset-box h3 {
-            margin-top: 0;
-            color: var(--text-dark);
+
+        .btn-link {
+            display: inline-block;
+            padding: 10px 16px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .btn-link:hover {
+            background-color: var(--primary-dark);
         }
 
     </style>
@@ -150,96 +100,66 @@
     </header>
 
     <div class="dashboard-container">
-  <div class="summary-box">
-    <h3>Total Users</h3>
-    <p>{{ user_count }}</p>
-  </div>
-  <div class="summary-box">
-    <h3>Total Chats</h3>
-    <p>{{ chat_count }}</p>
-  </div>
-  <div class="summary-box">
-    <h3>Top Reason</h3>
-    <p>{{ top_reason[0] if top_reason else 'Tiada data' }}</p>
-  </div>
+        <div class="summary-box">
+            <h3>Total Users</h3>
+            <p>{{ user_count }}</p>
+            <a href="/admin/dataset" class="btn-link">📂 Urus Dataset Chatbot</a>
+        </div>
 
-  <div class="chart-box">
-    <h3>Reason Distribution</h3>
-    <canvas id="reasonChart"></canvas>
-  </div>
+        <div class="table-box">
+            <h3>Users List</h3>
+            <table>
+                <tr>
+                    <th>ID</th><th>Username</th><th>Role</th>
+                </tr>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.role }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
 
-        <div class="dataset-box">
-  <h3>Dataset Chatbot</h3>
-  <form action="/admin/add_dataset_entry" method="POST">
-      <label>Alasan:</label>
-      <input type="text" name="reason" required>
-      <label>Mesej Pengguna:</label>
-      <input type="text" name="user_input" required>
-      <label>Balasan Chatbot:</label>
-      <textarea name="bot_reply" required></textarea>
-      <button class="btn" type="submit">Tambah</button>
-  </form>
-  <br>
-  <form action="/admin/upload_dataset" method="POST" enctype="multipart/form-data">
-      <label>Muat Naik Dataset (JSON):</label>
-      <input type="file" name="dataset_file" accept=".json">
-      <button class="btn" type="submit">Muat Naik</button>
-  </form>
-  <br>
-  <a class="btn" href="/admin/export_dataset">📁 Muat Turun Dataset</a>
-</div>
-
-
-  <div class="table-box">
-    <h3>Users List</h3>
-    <table>
-      <tr>
-        <th>ID</th><th>Username</th><th>Role</th>
-      </tr>
-      {% for user in users %}
-      <tr>
-        <td>{{ user.id }}</td>
-        <td>{{ user.username }}</td>
-        <td>{{ user.role }}</td>
-      </tr>
-      {% endfor %}
-    </table>
-  </div>
-</div>
+        <div class="chart-box">
+            <h3>Reason Distribution</h3>
+            <canvas id="reasonChart" style="width:100%; height:400px;"></canvas>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    // This data should come from your Flask view — pass it in like you do for user_count/chat_count
-    const reasonLabels = {{ reason_labels | tojson }};
-    const reasonCounts = {{ reason_counts | tojson }};
+    <script>
+        const reasonLabels = {{ reason_labels | tojson }};
+        const reasonCounts = {{ reason_counts | tojson }};
 
-    const ctx = document.getElementById('reasonChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: reasonLabels,
-            datasets: [{
-                label: 'Bilangan Pilihan',
-                data: reasonCounts,
-                backgroundColor: '#81c784',
-                borderColor: '#4caf50',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Bilangan'
+        const ctx = document.getElementById('reasonChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: reasonLabels,
+                datasets: [{
+                    label: 'Bilangan Pilihan',
+                    data: reasonCounts,
+                    backgroundColor: '#81c784',
+                    borderColor: '#4caf50',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Bilangan'
+                        }
                     }
                 }
             }
-        }
-    });
-</script>
-
+        });
+    </script>
 </body>
 </html>
