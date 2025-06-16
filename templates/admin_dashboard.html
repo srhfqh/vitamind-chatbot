@@ -118,7 +118,17 @@
     </section>
 
     <section class="card">
-        <h2>Dataset Chatbot</h2>
+        <h2>Statistik Sistem</h2>
+        <p><strong>Jumlah Pengguna:</strong> {{ user_count }}</p>
+        <p><strong>Jumlah Mesej Chat:</strong> {{ chat_count }}</p>
+        {% if top_reason %}
+        <p><strong>Sebab Paling Biasa Dipilih:</strong> {{ top_reason[0] }} ({{ top_reason[1] }} kali)</p>
+        {% endif %}
+    </section>
+
+
+    <section class="card">
+       <h2>Dataset Chatbot</h2>
         <form action="/admin/add_dataset_entry" method="POST">
             <label>Alasan:</label>
             <input type="text" name="reason" required>
