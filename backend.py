@@ -85,7 +85,14 @@ def chat():
         return jsonify({"error": "Mesej pengguna diperlukan"}), 400
 
 
-    bot_response = mental_health_chatbot(user_message)
+   chat_log = ChatLog(
+        user_id=current_user.id,
+        reason=session.get('reason'),
+        message=user_message
+    )
+    db.session.add(chat_log)
+    db.session.commit()
+
     return jsonify({"response": bot_response})
 
 @app.route('/')
@@ -202,7 +209,19 @@ def admin_dashboard():
         return redirect(url_for('reason_selection'))
 
     users = User.query.all()
-    return render_template('admin_dashboard.html', users=users)
+    user_count = User.query.count()
+    chat_count = ChatLog.query.count()
+
+    # Most selected reason
+    top_reason = db.session.query(
+        ChatLog.reason, func.count(ChatLog.reason)
+    ).group_by(ChatLog.reason).order_by(func.count(ChatLog.reason).desc()).first()
+
+    return render_template('admin_dashboard.html',
+                           users=users,
+                           user_count=user_count,
+                           chat_count=chat_count,
+                           top_reason=top_reason)
 
 @app.route('/admin/add_dataset_entry', methods=['POST'])
 @login_required
