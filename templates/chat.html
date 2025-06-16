@@ -355,6 +355,14 @@ font-size: 1.5rem;
         <div class="quote-box">"Dunia ni kadang serabut, tapi at least nasi lemak tetap sedap"</div>
       </div>
 
+      <div id="chat-window">
+        {% for chat in chat_history %}
+        <div class="chat-bubble user">{{ chat.message }}</div>
+        <div class="chat-bubble bot">{{ chat.reply }}</div>
+        {% endfor %}
+      </div>
+
+
        <div class="chatbot-section order-1 order-md-2">
         <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3g5NmpjMzhpcHd0dm83cm95dzR2N2dtend5cjBxMXk2ZmdhNmdmMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7uLItJVS8oaPvaoALH/giphy.gif" class="floating-gif" alt="Relaxing animation">
         <div class="chat-container">
