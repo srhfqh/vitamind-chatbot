@@ -84,18 +84,16 @@ def chat():
     if not user_message:
         return jsonify({"error": "Mesej pengguna diperlukan"}), 400
 
-
-bot_response = mental_health_chatbot(user_message)
-
 chat_log = ChatLog(
         user_id=current_user.id,
         reason=session.get('reason'),
         message=user_message
     )
-    db.session.add(chat_log)
-    db.session.commit()
+db.session.add(chat_log)
+db.session.commit()
 
-    return jsonify({"response": bot_response})
+bot_response = mental_health_chatbot(user_message)
+return jsonify({"response": bot_response})
 
 @app.route('/')
 def serve_index():
