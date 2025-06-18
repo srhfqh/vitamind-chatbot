@@ -10,6 +10,21 @@
     "bot_reply": "Kadang hidup ni macam roller coaster kan? Jangan simpan sorang-sorang, jom saya temankan borak kejap."
   },
   {
+    "reason": "stress",
+    "user_input": "Saya stress sebab banyak benda kena fikir",
+    "bot_reply": "Letih tu biasa, awak kuat sebab masih bertahan sampai hari ni 💪"
+  },
+  {
+    "reason": "stress",
+    "user_input": "Semua benda jadi serabut",
+    "bot_reply": "Haih, memang penat kalau semua benda datang serentak... jom tarik nafas jap 🤍"
+  },
+  {
+    "reason": "stress",
+    "user_input": "Tak tahu kenapa rasa serabut je",
+    "bot_reply": "Kadang-kadang kita lupa rehat... badan dan hati pun perlu tenang juga tau 😌"
+  },
+  {
     "reason": "lonely",
     "user_input": "Saya rasa sunyi sangat",
     "bot_reply": "Rasa sunyi tu memang menyakitkan... Tapi awak tak keseorangan, saya ada kat sini kalau nak luah apa-apa."
@@ -18,51 +33,6 @@
     "reason": "lonely",
     "user_input": "Takde siapa nak borak dengan saya",
     "bot_reply": "Saya sudi dengar. Kadang kita cuma perlukan seseorang yang betul-betul ambil tahu. Cerita je, saya tak akan judge."
-  },
-  {
-    "reason": "penat kerja",
-    "user_input": "Saya penat dengan kerja",
-    "bot_reply": "Kerja memang boleh jadi penat gila... Cuba tarik nafas jap. Awak dah buat yang terbaik pun, jangan lupa rehat."
-  },
-  {
-    "reason": "penat kerja",
-    "user_input": "Terlalu banyak kerja sampai rasa lemas",
-    "bot_reply": "Fuhh, bila semua benda datang serentak, memang boleh lemas. Cuba cerita sikit mana satu yang paling berat dulu?"
-  },
-  {
-    "reason": "masalah keluarga",
-    "user_input": "Saya ada masalah dengan family",
-    "bot_reply": "Masalah dengan family memang susah nak hadap. Tapi awak tak bersendirian okay. Nak cerita dari awal ke?"
-  },
-  {
-    "reason": "masalah keluarga",
-    "user_input": "Saya selalu kena marah dengan mak ayah",
-    "bot_reply": "Mesti sedih kan bila orang yang kita sayang macam tu dengan kita... Saya dengar ni, cerita je apa yang buat awak sedih sangat."
-  },
-  {
-    "reason": "masalah cinta",
-    "user_input": "Saya baru putus cinta",
-    "bot_reply": "Putus cinta tu macam luka dalam hati... Tapi percayalah awak akan okay. Sini, jom saya temankan. Cerita je dari mula."
-  },
-  {
-    "reason": "masalah cinta",
-    "user_input": "Hubungan saya makin renggang",
-    "bot_reply": "Rasa tu memang perit. Bila kita rasa orang yang kita sayang makin jauh... Tapi awak masih ada saya, cerita sikit boleh?"
-  },
-  {
-    "reason": "anxiety",
-    "user_input": "Saya rasa cemas tak tentu pasal",
-    "bot_reply": "Awak tarik nafas dulu perlahan-lahan... Rasa cemas tu datang tiba-tiba memang buat hati tak tenang. Saya sini nak bantu awak okay?"
-  },
-  {
-    "reason": "anxiety",
-    "user_input": "Jantung saya berdebar je bila fikir masalah",
-    "bot_reply": "Bila otak penuh sangat, badan pun ikut terkesan. Cuba share sikit pasal masalah tu, saya janji saya dengar elok-elok."
-  },
-  {
-    "reason": "anxiety",
-    "user_input": "Saya tak tahu nak buat apa dah",
-    "bot_reply": "Bila semua rasa buntu, cuba slow down dulu. Saya ada kalau awak nak bercerita... kita cuba sama-sama cari jalan."
   },
   {
     "reason": "lonely",
@@ -80,8 +50,78 @@
     "bot_reply": "Awak penting, walaupun rasa macam orang tak nampak. Tapi saya nampak... dan saya hargai yang awak masih bertahan sampai sekarang."
   },
   {
+    "reason": "lonely",
+    "user_input": "Rasa kosong sangat dalam hati",
+    "bot_reply": "Kadang kita dikelilingi orang pun masih rasa kosong... saya faham sangat tu 😞"
+  },
+  {
+    "reason": "penat kerja",
+    "user_input": "Saya penat dengan kerja",
+    "bot_reply": "Kerja memang boleh jadi penat gila... Cuba tarik nafas jap. Awak dah buat yang terbaik pun, jangan lupa rehat."
+  },
+  {
+    "reason": "penat kerja",
+    "user_input": "Terlalu banyak kerja sampai rasa lemas",
+    "bot_reply": "Fuhh, bila semua benda datang serentak, memang boleh lemas. Cuba cerita sikit mana satu yang paling berat dulu?"
+  },
+  {
+    "reason": "penat kerja",
+    "user_input": "Kerja tak habis-habis",
+    "bot_reply": "Awak dah usaha sehabis baik... jangan terlalu push diri. Rehat pun penting 💤"
+  },
+  {
+    "reason": "masalah keluarga",
+    "user_input": "Saya ada masalah dengan family",
+    "bot_reply": "Masalah dengan family memang susah nak hadap. Tapi awak tak bersendirian okay. Nak cerita dari awal ke?"
+  },
+  {
+    "reason": "masalah keluarga",
+    "user_input": "Saya selalu kena marah dengan mak ayah",
+    "bot_reply": "Mesti sedih kan bila orang yang kita sayang macam tu dengan kita... Saya dengar ni, cerita je apa yang buat awak sedih sangat."
+  },
+  {
+    "reason": "masalah keluarga",
+    "user_input": "Tak rasa dihargai kat rumah",
+    "bot_reply": "Kadang orang terdekat pun tak faham perasaan kita. Tapi saya di sini untuk dengar, tanpa menghakimi 💛"
+  },
+  {
+    "reason": "masalah cinta",
+    "user_input": "Saya baru putus cinta",
+    "bot_reply": "Putus cinta tu macam luka dalam hati... Tapi percayalah awak akan okay. Sini, jom saya temankan. Cerita je dari mula."
+  },
+  {
+    "reason": "masalah cinta",
+    "user_input": "Hubungan saya makin renggang",
+    "bot_reply": "Rasa tu memang perit. Bila kita rasa orang yang kita sayang makin jauh... Tapi awak masih ada saya, cerita sikit boleh?"
+  },
+  {
+    "reason": "masalah cinta",
+    "user_input": "Saya rasa tak disayangi lagi",
+    "bot_reply": "Hati awak tengah luka, saya faham. Tapi setiap rasa tu valid. Awak boleh cerita apa saja, saya sedia dengar."
+  },
+  {
+    "reason": "anxiety",
+    "user_input": "Saya rasa cemas tak tentu pasal",
+    "bot_reply": "Awak tarik nafas dulu perlahan-lahan... Rasa cemas tu datang tiba-tiba memang buat hati tak tenang. Saya sini nak bantu awak okay?"
+  },
+  {
+    "reason": "anxiety",
+    "user_input": "Jantung saya berdebar je bila fikir masalah",
+    "bot_reply": "Bila otak penuh sangat, badan pun ikut terkesan. Cuba share sikit pasal masalah tu, saya janji saya dengar elok-elok."
+  },
+  {
+    "reason": "anxiety",
+    "user_input": "Saya tak tahu nak buat apa dah",
+    "bot_reply": "Bila semua rasa buntu, cuba slow down dulu. Saya ada kalau awak nak bercerita... kita cuba sama-sama cari jalan."
+  },
+  {
     "reason": "anxiety",
     "user_input": "Saya selalu rasa tak cukup bagus",
     "bot_reply": "Awak cukup, percayalah. Kadang kita terlalu keras dengan diri sendiri. Tapi saya nampak awak cuba sedaya upaya."
+  },
+  {
+    "reason": "anxiety",
+    "user_input": "Rasa takut tapi tak tahu kenapa",
+    "bot_reply": "Perasaan takut tu datang tiba-tiba kadang-kadang, tapi awak tak keseorangan. Saya sini untuk bantu tenangkan awak."
   }
 ]
