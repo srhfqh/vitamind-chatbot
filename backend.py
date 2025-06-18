@@ -39,6 +39,7 @@ class ChatLog(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     reason = db.Column(db.String(100))
     message = db.Column(db.String(500))
+    reply = db.Column(db.String(500)) 
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
 
@@ -80,44 +81,6 @@ def mental_health_chatbot(user_input):
         return "Saya faham perasaan awak tu... Cerita sikit lagi, saya sedia nak dengar dan bantu ikut kemampuan saya 😊"
 
     return best_match
-
-
-
-@app.route('/chat_api', methods=['POST'])
-def chat():
-    try:
-        user_message = request.json.get("message")
-        if not user_message:
-            return jsonify({"error": "Mesej pengguna diperlukan"}), 400
-
-        if not current_user.is_authenticated:
-            return jsonify({"error": "Sesi anda telah tamat. Sila login semula."}), 401
-
-        bot_response = mental_health_chatbot(user_message)
-
-        # Save user message
-        user_log = ChatLog(
-            user_id=current_user.id,
-            reason=session.get('reason'),
-            message=user_message
-        )
-        db.session.add(user_log)
-
-        # Save bot reply
-        bot_log = ChatLog(
-            user_id=current_user.id,
-            reason=session.get('reason'),
-            message=bot_response
-        )
-        db.session.add(bot_log)
-
-        db.session.commit()
-
-        return jsonify({"response": bot_response})
-    
-    except Exception as e:
-        print(f"🚨 Chat API error: {e}", flush=True)
-        return jsonify({"error": "Maaf, terdapat masalah dengan pelayan."}), 500
 
 
 
@@ -227,18 +190,30 @@ def chat_page():
 @app.route('/chat/message', methods=['POST'])
 @login_required
 def chat_message():
-    data = request.get_json()
-    message = data.get('message')
+    try:
+        data = request.get_json()
+        user_message = data.get('message')
+        if not user_message:
+            return jsonify({"error": "Mesej pengguna diperlukan"}), 400
 
-    # Example: generate a reply (replace this with your actual logic)
-    reply = f"Saya terima mesej: {message}"
+        bot_response = mental_health_chatbot(user_message)
 
-    # Optionally: save to DB
-    new_chat = ChatLog(user_id=current_user.id, message=message, reply=reply)
-    db.session.add(new_chat)
-    db.session.commit()
+        # Save user message + bot reply
+        new_chat = ChatLog(
+            user_id=current_user.id,
+            reason=session.get('reason'),
+            message=user_message,
+            reply=bot_response
+        )
+        db.session.add(new_chat)
+        db.session.commit()
 
-    return jsonify({'response': reply})
+        return jsonify({"response": bot_response})
+
+    except Exception as e:
+        print(f"🚨 Chat API error: {e}")
+        return jsonify({"error": "Maaf, terdapat masalah dengan pelayan."}), 500
+
 
 
 @app.route('/admin')
