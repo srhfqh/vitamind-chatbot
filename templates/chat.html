@@ -360,6 +360,7 @@ font-size: 1.5rem;
         <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3g5NmpjMzhpcHd0dm83cm95dzR2N2dtend5cjBxMXk2ZmdhNmdmMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7uLItJVS8oaPvaoALH/giphy.gif" class="floating-gif" alt="Relaxing animation">
         <div class="chat-container">
           <div id="chat-box">
+            {% if chat_history %}
             {% for chat in chat_history %}
             <div class="chat-message user">
               <div class="bubble"><strong>Anda:</strong> {{ chat.message }}</div>
@@ -368,7 +369,13 @@ font-size: 1.5rem;
               <div class="bubble"><strong>VitaMind:</strong> {{ chat.reply }}</div>
             </div>
             {% endfor %}
+            {% else %}
+            <div class="chat-message bot">
+              <div class="bubble"><strong>VitaMind:</strong> Hai! Saya VitaMind. Bagaimana saya boleh membantu anda hari ini?</div>
+            </div>
+            {% endif %}
           </div>
+
 
           <div class="input-group d-flex flex-column flex-sm-row">
            <textarea id="user-message" class="form-control" rows="1" placeholder="Tulis mesej anda..." onkeydown="checkEnter(event)"></textarea>
