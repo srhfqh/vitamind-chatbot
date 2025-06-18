@@ -469,10 +469,7 @@ async function sendMessage(userMessage) {
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      showGreeting();
-      const button = document.getElementById('emoji-button');
-      const picker = document.getElementById('emoji-picker');
-      const input = document.getElementById('user-message');
+
 
       button.addEventListener('click', () => {
         picker.style.display = picker.style.display === 'none' ? 'block' : 'none';
