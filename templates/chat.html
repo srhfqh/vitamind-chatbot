@@ -422,12 +422,7 @@ font-size: 1.5rem;
       `;
       chatBox.scrollTop = chatBox.scrollHeight;
 
-      try {
-        const response = await fetch('/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: userMessage })
-        });
+    
         const data = await response.json();
 
         chatBox.innerHTML += `
